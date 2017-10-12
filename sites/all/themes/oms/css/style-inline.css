@@ -1006,6 +1006,69 @@ body {
 .header {
   background-color: #017ecb;
 }
+.header #logo img {
+  width: 40px;
+}
+.header .header-content {
+  display: table;
+}
+.header .header-content > div {
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;
+}
+.header .header-content > div > a {
+  color: #f2f2f2;
+  padding-bottom: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 14px;
+}
+.header .header-content nav {
+  display: none;
+}
+.header .header-content .main-menu:hover, .header .header-content .second-menu:hover, .header .header-content .user-menu:hover {
+  background-color: #eee;
+  position: relative;
+}
+.header .header-content .main-menu:hover > a, .header .header-content .second-menu:hover > a, .header .header-content .user-menu:hover > a {
+  color: #444;
+}
+.header .header-content .main-menu:hover nav, .header .header-content .second-menu:hover nav, .header .header-content .user-menu:hover nav {
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  display: block;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+  background-color: #fff;
+}
+.header .header-content .main-menu:hover nav a, .header .header-content .second-menu:hover nav a, .header .header-content .user-menu:hover nav a {
+  color: #444;
+}
+.header .header-content .main-menu:hover nav ul.menu, .header .header-content .second-menu:hover nav ul.menu, .header .header-content .user-menu:hover nav ul.menu {
+  width: 400px;
+  padding-left: 0px;
+  display: block;
+  margin-top: 0px;
+}
+.header .header-content .main-menu:hover nav ul.menu li, .header .header-content .second-menu:hover nav ul.menu li, .header .header-content .user-menu:hover nav ul.menu li {
+  display: block;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #eee;
+  width: 50%;
+  float: left;
+}
+.header .header-content .main-menu:hover nav ul.menu li a, .header .header-content .second-menu:hover nav ul.menu li a, .header .header-content .user-menu:hover nav ul.menu li a {
+  display: block;
+  padding: 10px;
+}
+.header .header-content .main-menu:hover nav ul.menu li a:hover, .header .header-content .second-menu:hover nav ul.menu li a:hover, .header .header-content .user-menu:hover nav ul.menu li a:hover {
+  background-color: #eee;
+  color: #444;
+}
 
 /*components*/
 /*page*/

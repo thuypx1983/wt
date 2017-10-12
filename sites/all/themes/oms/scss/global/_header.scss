@@ -1,3 +1,72 @@
 .header{
   background-color: $color_green;
+
+  #logo img {
+    width: 40px;
+  }
+
+  .header-content{
+    display: table;
+    >div{
+      display: table-cell;
+      text-align: left;
+      vertical-align: middle;
+      &>a{
+        color: $color_gainsboro;
+        padding-bottom: 14px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 14px;
+      }
+    }
+    nav{
+      display: none;
+    }
+
+    .main-menu,.second-menu,.user-menu{
+      &:hover{
+        background-color: $color_light_gray;
+        position: relative;
+        &>a{
+          color: $color_light_black;
+        }
+        nav{
+          position: absolute;
+          top: 100%;
+          left: 0px;
+          display: block;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+          background-color: $color_white;
+          a{
+            color: $color_light_black;
+          }
+          ul.menu{
+            width: 400px;
+            padding-left: 0px;
+            display: block;
+            margin-top: 0px;
+            li{
+              display: block;
+              list-style: none;
+              padding: 0px;
+              margin: 0px;
+              border-bottom: 1px solid $color_light_gray;
+              border-right: 1px solid $color_light_gray;
+              width: 50%;
+              float: left;
+              a{
+                display: block;
+                padding: 10px;
+                &:hover{
+                  background-color: $color_light_gray;
+                  color: $color_light_black;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
 }
