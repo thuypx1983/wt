@@ -78,66 +78,25 @@
               <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
               <?php print render($page['help']); ?>
               <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-                <?php
-                $n=menu_get_object();
-                if (!$n) { ?>
-                    <h1><?php echo $title; ?></h1>
-                    <?php
-                }
-                ?>
             </div>
             <div class="row">
-              <?php if ($page['sidebar_first']): ?>
-                  <div class="col-md-3">
-                      <aside id="sidebar" role="complementary" class="sidebar clearfix">
-                        <?php print render($page['sidebar_first']); ?>
-                      </aside>
-                  </div>
-              <?php endif; ?>
-              <?php
-              $main_class="col-md-12";
-              if($page['sidebar_first'] AND $page['sidebar_second']){
-                $main_class="col-md-6";
-              }elseif(!$page['sidebar_first'] AND !$page['sidebar_second']){
-                $main_class="col-md-12";
-              }else{
-                $main_class="col-md-9";
-              }
-              ?>
-                <div class="<?php echo $main_class?>">
-                  <?php
-                  if($page['banner_top_content']){
-                    ?>
-                      <div class="banner-second">
-                        <?php print render($page['banner_top_content']);?>
-                      </div>
-                    <?php
-                  }
-                  ?>
+                <div class="col-md-9">
                     <section id="post-content" role="main">
                       <?php print render($page['content']); ?>
                     </section>
-                  <?php
-                  if($page['content_after']){
-                    ?>
-                      <div class="content-after">
-                          <div class="container">
-                            <?php print render($page['content_after']);?>
-                          </div>
-                      </div>
-                    <?php
-
-                  }?>
+                    <div class="content-after">
+                        <div class="container">
+                          <?php print render($page['content_after']);?>
+                        </div>
+                    </div>
                 </div>
-
-              <?php if ($page['sidebar_second']): ?>
+              <?php if ($page['sidebar_right']): ?>
                   <div class="col-md-3">
-                      <aside id="sidebar" role="complementary" class="sidebar clearfix">
-                        <?php print render($page['sidebar_second']); ?>
+                      <aside id="sidebar" class="sidebar clearfix">
+                        <?php print render($page['sidebar_right']); ?>
                       </aside>
                   </div>
               <?php endif; ?>
-
             </div>
         </div>
       <?php
@@ -150,7 +109,8 @@
           </div>
         <?php
 
-      }?>
+      }
+      ?>
     </div>
 
   <?php
