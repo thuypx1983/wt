@@ -52,6 +52,14 @@
                   ?>
                 </nav>
             </div>
+            <div class="search-box">
+              <?php
+
+              $block = module_invoke('search', 'block_view', 'search');
+              print render($block);
+
+              ?>
+            </div>
             <div class="user-menu">
                 <a href="#" rel="nofollow"><i class="fa fa-user"></i> Thành Viên</a>
                 <nav id="navigation-user-menu" class="" >
