@@ -3,3 +3,20 @@ body{
   padding: 0px;
   margin: 0px;
 }
+
+.block {
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 3px;
+  margin-top: 10px;
+  padding: 10px;
+  span.title {
+    display: block;
+    border-bottom: 2px solid #2980b9;
+    margin-bottom: 10px;
+    color: #2980b9;
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: -1px;
+  }
+}
