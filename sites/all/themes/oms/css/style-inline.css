@@ -1025,12 +1025,18 @@ body {
   margin: 0px;
 }
 
+* {
+  outline: none;
+}
+
 .block {
   background: #fff;
   border: 1px solid #e1e1e1;
   border-radius: 3px;
   margin-top: 10px;
   padding: 10px;
+  display: table;
+  width: 100%;
 }
 .block span.title {
   display: block;
@@ -1047,6 +1053,21 @@ body {
   font-size: 20px;
 }
 
+.views-row .row-content {
+  overflow: hidden;
+}
+.views-row .row-content .views-field-field-image img {
+  max-width: 100%;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.views-row .row-content:hover .views-field-field-image img {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 .text-red {
   color: #f44336;
   font-weight: bold;
@@ -1059,6 +1080,20 @@ body {
 img {
   max-width: 100%;
   height: auto;
+  display: block;
+}
+
+select, input {
+  border-radius: 0px;
+  border: none;
+  padding: 5px;
+}
+
+.view .views-exposed-form .views-exposed-widget {
+  padding: 5px 5px 0px 0px;
+}
+.view .views-exposed-form .views-exposed-widget .views-submit-button {
+  display: none;
 }
 
 .header {
@@ -1229,6 +1264,42 @@ img {
 .block-hot-story .views-row .row-info .views-field-totalcount {
   color: #999;
   font-size: 12px;
+}
+
+.block-main-hot-story {
+  position: relative;
+}
+.block-main-hot-story .view-filters {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+.block-main-hot-story .views-row {
+  margin-top: 30px;
+}
+.block-main-hot-story .views-row.views-row-1 {
+  width: 33.3333%;
+}
+.block-main-hot-story .views-row .row-content {
+  position: relative;
+}
+.block-main-hot-story .views-row .row-content .views-field-field-image img {
+  width: 100%;
+  display: block;
+}
+.block-main-hot-story .views-row .row-content .row-info {
+  position: absolute;
+  bottom: 0px;
+  background-color: rgba(68, 68, 68, 0.6);
+  width: 100%;
+  text-align: center;
+}
+.block-main-hot-story .views-row .row-content .row-info a {
+  font-size: 13px;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px;
+  display: block;
 }
 
 /*page*/

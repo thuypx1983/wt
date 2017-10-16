@@ -3,13 +3,17 @@ body{
   padding: 0px;
   margin: 0px;
 }
-
+*{
+  outline: none;
+}
 .block {
   background: #fff;
   border: 1px solid #e1e1e1;
   border-radius: 3px;
   margin-top: 10px;
   padding: 10px;
+  display: table;
+  width: 100%;
   span.title {
     display: block;
     border-bottom: 2px solid #2980b9;
@@ -27,6 +31,27 @@ body{
   }
 }
 
+.views-row{
+  .row-content{
+    overflow: hidden;
+    .views-field-field-image img {
+      max-width: 100%;
+
+      -moz-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    &:hover{
+      .views-field-field-image img {
+        -moz-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+      }
+    }
+  }
+
+}
+
 .text-red{
   color: $color_red;
   font-weight: bold;
@@ -38,4 +63,19 @@ body{
 img{
   max-width: 100%;
   height: auto;
+  display: block;
+}
+select,input{
+  border-radius: 0px;
+  border: none;
+  padding: 5px;
+}
+.view{
+  .views-exposed-form .views-exposed-widget{
+    padding: 5px 5px 0px 0px;
+    .views-submit-button{
+      display: none;
+    }
+  }
+
 }

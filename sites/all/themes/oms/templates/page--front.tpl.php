@@ -81,10 +81,8 @@
             </div>
 
           <?php if ($page['hightlight']): ?>
-              <div class="row">
-                  <div class="hight-light">
-                    <?php print render($page['hightlight']); ?>
-                  </div>
+              <div class="hight-light">
+                <?php print render($page['hightlight']); ?>
               </div>
           <?php endif; ?>
 
