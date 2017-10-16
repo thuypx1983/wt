@@ -10,6 +10,7 @@ scripts[] = js/scripts.js
 
 regions[sidebar_right]  = Sidebar right
 regions[header]         = Header
+regions[hightlight]    = Hight light
 regions[content_top]    = Content Top
 regions[content]        = Content
 regions[content_after]        = Content after

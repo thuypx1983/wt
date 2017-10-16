@@ -17,6 +17,25 @@ body{
     color: #2980b9;
     font-size: 20px;
     font-weight: 300;
-    letter-spacing: -1px;
+    text-transform: uppercase;
+    &:after{
+      font-family: "FontAwesome";
+      content: " \f105";
+      font-size: 20px;
+    }
+
   }
+}
+
+.text-red{
+  color: $color_red;
+  font-weight: bold;
+  span,a,i,p{
+    color: $color_red;
+    font-weight: bold;
+  }
+}
+img{
+  max-width: 100%;
+  height: auto;
 }

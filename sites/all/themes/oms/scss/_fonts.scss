@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('/sites/all/themes/oms/fronts/segoe-ui.eot'); /* IE9 Compat Modes */
+  src: url('/sites/all/themes/oms/fronts/segoe-ui.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/sites/all/themes/oms/fronts/segoe-ui.woff') format('woff'), /* Pretty Modern Browsers */
+  url('/sites/all/themes/oms/fronts/segoe-ui.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('/sites/all/themes/oms/fronts/segoe-ui.svg#Segoe UI') format('svg'); /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('/sites/all/themes/oms/fronts/segoe-ui-bold.eot'); /* IE9 Compat Modes */
+  src: url('/sites/all/themes/oms/fronts/segoe-ui-bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/sites/all/themes/oms/fronts/segoe-ui-bold.woff') format('woff'), /* Pretty Modern Browsers */
+  url('/sites/all/themes/oms/fronts/segoe-ui-bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('/sites/all/themes/oms/fronts/segoe-ui-bold.svg#Segoe UI') format('svg'); /* Legacy iOS */
+  font-weight: bold;
+  font-style: normal;
+}

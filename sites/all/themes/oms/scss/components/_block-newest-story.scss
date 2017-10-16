@@ -1,0 +1,30 @@
+.block-newest-story{
+  .item-list{
+    ul{
+      padding-left: 0px;
+      li{
+        list-style: none;
+        margin: 0px;
+        display: table;
+        width: 100%;
+        border-bottom: 1px solid $color_light_gray;
+        padding: 5px;
+
+      }
+
+    }
+  }
+  .views-row{
+    .views-field-field-image{
+      float: left;
+      width: 40px;
+      margin-right: 10px;
+    }
+    .row-info{
+      .views-field-totalcount{
+        color: $color_gray_1;
+        font-size: 12px;
+      }
+    }
+  }
+}

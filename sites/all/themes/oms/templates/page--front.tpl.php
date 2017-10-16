@@ -79,6 +79,15 @@
               <?php print render($page['help']); ?>
               <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
             </div>
+
+          <?php if ($page['hightlight']): ?>
+              <div class="row">
+                  <div class="hight-light">
+                    <?php print render($page['hightlight']); ?>
+                  </div>
+              </div>
+          <?php endif; ?>
+
             <div class="row">
                     <div class="col-md-8">
                         <section id="post-content" role="main">

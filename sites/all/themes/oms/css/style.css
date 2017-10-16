@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'Segoe UI';
+  src: url("/sites/all/themes/oms/fronts/segoe-ui.eot");
+  /* IE9 Compat Modes */
+  src: url("/sites/all/themes/oms/fronts/segoe-ui.eot?#iefix") format("embedded-opentype"), url("/sites/all/themes/oms/fronts/segoe-ui.woff") format("woff"), url("/sites/all/themes/oms/fronts/segoe-ui.ttf") format("truetype"), url("/sites/all/themes/oms/fronts/segoe-ui.svg#Segoe UI") format("svg");
+  /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Segoe UI';
+  src: url("/sites/all/themes/oms/fronts/segoe-ui-bold.eot");
+  /* IE9 Compat Modes */
+  src: url("/sites/all/themes/oms/fronts/segoe-ui-bold.eot?#iefix") format("embedded-opentype"), url("/sites/all/themes/oms/fronts/segoe-ui-bold.woff") format("woff"), url("/sites/all/themes/oms/fronts/segoe-ui-bold.ttf") format("truetype"), url("/sites/all/themes/oms/fronts/segoe-ui-bold.svg#Segoe UI") format("svg");
+  /* Legacy iOS */
+  font-weight: bold;
+  font-style: normal;
+}
 /* Variables */
 /* Break point */
 /* Mixin */
@@ -14,5 +32,25 @@
 /* opacity */
 /* breakpoint with one condition(min or max) */
 /* breakpoint with two conditions (min and max) */
+.block-newest-story .item-list ul {
+  padding-left: 0px;
+}
+.block-newest-story .item-list ul li {
+  list-style: none;
+  margin: 0px;
+  display: table;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  padding: 5px;
+}
+.block-newest-story .views-row .views-field-field-image {
+  float: left;
+  width: 40px;
+  margin-right: 10px;
+}
+.block-newest-story .views-row .row-info .views-field-totalcount {
+  color: #999;
+  font-size: 12px;
+}
 
 /*# sourceMappingURL=style.css.map */
