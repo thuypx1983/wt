@@ -18,6 +18,12 @@ function product_extend_node_view($node, $view_mode, $langcode) {
       '#markup' =>  '<div class="fb-comments" data-width="100%" data-numposts="5"></div>',
       '#attributes' => array('class' => array('comments')),
     );
+    $node->content['created'] = array(
+      '#type' => 'item',
+      '#title' => '',
+      '#markup' =>  '<span class="created">'.format_date($node->created).'</span>',
+      '#attributes' => array('class' => array('created')),
+    );
     switch ($node->type) {
       case 'story':
         $node->content['news_title'] = array(
@@ -25,12 +31,6 @@ function product_extend_node_view($node, $view_mode, $langcode) {
           '#title' => '',
           '#markup' =>  '<h1 class="content-title">'.$node->title.'</h1>',
           '#attributes' => array('class' => array('news-title')),
-        );
-        $node->content['created'] = array(
-          '#type' => 'item',
-          '#title' => '',
-          '#markup' =>  '<span class="created">'.format_date($node->created).'</span>',
-          '#attributes' => array('class' => array('created')),
         );
 
         $block = block_load('views', 'chapter-block');
@@ -66,11 +66,27 @@ function product_extend_node_view($node, $view_mode, $langcode) {
           '#markup' =>  $output,
           '#attributes' => array('class' => array('chapters')),
         );
-
-
         //
         break;
 
+      case 'chapter':
+        $node->content['news_title'] = array(
+          '#type' => 'item',
+          '#title' => '',
+          '#markup' =>  '<h1 class="content-title">'.$node->title.'</h1>',
+          '#attributes' => array('class' => array('news-title')),
+        );
+        $field_story=field_get_items('node',$node,'field_story');
+        $field_author=field_get_items('node',$field_story[0]['entity'],'field_author');
+        $author=node_load($field_author[0]['target_id']);
+
+        $node->content['author'] = array(
+          '#type' => 'item',
+          '#title' => '',
+          '#markup' =>  '<div class="author"><a href="'.url('node/'.$author->nid).'">'.$author->title.'</a></div>',
+          '#attributes' => array('class' => array('author')),
+        );
+        break;
       default:
         break;
     }
@@ -121,7 +137,36 @@ function product_extend_field_extra_fields() {
       )
     );
 
-    return $extra;
+    $extra['node']['chapter']['display'] = array(
+      'news_title' => array(
+        'label' => t('Title'),
+        'description' => t('Title.'),
+        'weight' => 1,
+      ),
+     'author' => array(
+        'label' => t('Author'),
+        'description' => t('Author.'),
+        'weight' => 1,
+      ),
+      'social_buttons' => array(
+        'label' => t('social_buttons'),
+        'description' => t('social_buttons'),
+        'weight' => 1,
+      ),
+      'facebook_comment' => array(
+        'label' => t('Facebook comment'),
+        'description' => t('Facebook comment'),
+        'weight' => 1,
+      ),
+      'created' => array(
+        'label' => t('Created date'),
+        'description' => t('created date.'),
+        'weight' => 1,
+      ) ,
+    );
+
+
+  return $extra;
 }
 
 

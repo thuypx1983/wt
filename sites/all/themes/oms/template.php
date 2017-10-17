@@ -156,9 +156,40 @@ function oms_preprocess_node(&$variables) {
   }
 }
 
+
 /**
- * Add javascript files for front-page jquery slideshow.
+ * @param $type
+ * @param $lang
+ * @param $nid
+ * @return nid
  */
-if (drupal_is_front_page()) {
-  //drupal_add_js(drupal_get_path('theme', 'oms') . '/js/sliding_effect.js');
+
+function getNextNode($type, $lang, $nid)
+{
+
+  $static_key = "getNextNode_{$type}_{$lang}_{$nid}";
+
+
+  // Instead of just __FUNCTION__, since this can be called many times per page load,
+  // on a different user each time
+  //$results = &drupal_static(__FUNCTION__, null);
+
+  if (!isset($results)) {
+
+    // cid pattern - modulename:datatype:id
+    $cid = $static_key;
+
+    if ($cache = cache_get($cid)) {
+      $results = $cache->data;
+    } else {
+      // Do expensive stuff.  In this case, several MySQL queries
+      $results = db_query("SELECT nid FROM {node} WHERE type = '{$type}' AND status=1 AND `language`='{$lang}' AND `nid` > {$nid} ORDER BY `title`  ASC  LIMIT 1")->fetchField();
+
+      // keep these stats cached for at least 60 minutes (3600 seconds)
+      cache_set($cid, $results, 'cache', time() + 3600);
+    }
+
+  }
+  return $results;
+
 }
