@@ -1,0 +1,112 @@
+.view-stories-list{
+  position: relative;
+  .view-header{
+    padding-left: 15px;
+    padding-right: 15px;
+    display: block;
+    h1{
+      margin-bottom: 20px;
+      margin-top: 5px;
+    }
+  }
+  .view-filters{
+    position: absolute;
+    right: 0px;
+    display: inline-block;
+    top: 10px;
+    label{
+      display: none;
+    }
+  }
+  .views-row{
+    .row-content{
+      display: table;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #e5e6e9;
+      border-radius: 3px;
+      box-shadow: 1px 1px 3px #e5e6e9;
+      position: relative;
+      .views-field-title{
+        h3{
+          font-size: 14px;
+          font-weight: bold;
+          margin: 0px;
+        }
+      }
+      .views-field-field-image{
+        float: left;
+        width: 40%;
+        margin-right: 15px;
+      }
+      .views-field-changed,.views-field-field-author,.views-field-field-category{
+        font-size: 12px;
+        color: $color_gray_1;
+        margin-top: 5px;
+      }
+      .views-field-field-rating{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        display: inline-block;
+        .field-content{
+          position: relative;
+          text-align: center;
+          line-height: 55px;
+          width: 55px;
+          height: 55px;
+          z-index: 2;
+          color: $color_white;
+          font-weight: bold;
+          &:after{
+            position: absolute;
+            font-family: FontAwesome;
+            content: "\f005";
+            width: 55px;
+            height: 55px;
+            left: 0px;
+            top: 0px;
+            font-size: 55px;
+            color: $color_yellow;
+            z-index: -1;
+          }
+        }
+      }
+    }
+  }
+
+}
+@include bp(min-width,$bp-tablet+1){
+  .view-stories-list{
+    .views-row{
+      &:nth-child(n+7){
+        width: 25%;
+        .row-content{
+          padding: 0px;
+          border: none;
+          border-radius: inherit;
+          box-shadow: none;
+          .views-field-title{
+            text-align: center;
+          }
+          .views-field-field-image{
+            float: none;
+            width: 100%;
+          }
+          .views-field-changed,.views-field-field-author,.views-field-field-rating,.views-field-field-category{
+            display: none;
+          }
+          .views-field-field-state{
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            padding: 3px 0;
+            margin: 0;
+          }
+        }
+      }
+
+    }
+  }
+}

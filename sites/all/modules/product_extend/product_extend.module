@@ -19,45 +19,11 @@ function product_extend_node_view($node, $view_mode, $langcode) {
       '#attributes' => array('class' => array('comments')),
     );
     switch ($node->type) {
-        case 'product':
-        case 'technical':
-            $node->content['news_title'] = array(
-                '#type' => 'item',
-                '#title' => '',
-                '#markup' =>  '<h1 class="content-title">'.$node->title.'</h1>',
-                '#attributes' => array('class' => array('news-title')),
-            );
-            $node->content['created'] = array(
-                '#type' => 'item',
-                '#title' => '',
-                '#markup' =>  '<span class="created">'.format_date($node->created).'</span>',
-                '#attributes' => array('class' => array('created')),
-            );
-            $node->content['btn_send_request'] = array(
-                '#type' => 'item',
-                '#title' => '',
-                '#markup' =>  '<span class="btn-send-request"><a class="ctools-use-modal ctools-modal-modal-popup-medium" href="/modal_forms/nojs/webform/525">'.t('Đặt thuê thiết bị').'</a></span>',
-                '#attributes' => array('class' => array('btn-send-request')),
-            );
-            $block = block_load('block', 7);
-            $block=_block_get_renderable_array(_block_render_blocks(array($block)));
-            $output = drupal_render($block);
-
-            $node->content['block_design_process'] = array(
-                '#type' => 'item',
-                '#title' => '',
-                '#markup' =>  '<div class="div-design-process">'.$output.'</div>',
-                '#attributes' => array('class' => array('btn-send-request')),
-            );
-            //
-            break;
-      case 'video':
-      case 'page':
-      case 'article':
+      case 'story':
         $node->content['news_title'] = array(
           '#type' => 'item',
           '#title' => '',
-          '#markup' =>  '<h1 class="news-title">'.$node->title.'</h1>',
+          '#markup' =>  '<h1 class="content-title">'.$node->title.'</h1>',
           '#attributes' => array('class' => array('news-title')),
         );
         $node->content['created'] = array(
@@ -66,7 +32,45 @@ function product_extend_node_view($node, $view_mode, $langcode) {
           '#markup' =>  '<span class="created">'.format_date($node->created).'</span>',
           '#attributes' => array('class' => array('created')),
         );
+
+        $block = block_load('views', 'chapter-block');
+        $block=_block_get_renderable_array(_block_render_blocks(array($block)));
+        $block_title=$block['views_chapter-block']['#block']->subject;
+        $block['views_chapter-block']['#block']->subject=$block_title.' '.$node->title;
+        $output = drupal_render($block);
+        $node->content['newest_chapters'] = array(
+          '#type' => 'item',
+          '#title' => '',
+          '#markup' =>  $output,
+          '#attributes' => array('class' => array('newest-chapters')),
+        );
+
+        $block = block_load('views', 'chapter-block_all');
+        $block=_block_get_renderable_array(_block_render_blocks(array($block)));
+
+        $block_title=$block['views_chapter-block_all']['#block']->subject;
+        $block['views_chapter-block_all']['#block']->subject=$block_title.' '.$node->title;
+        $output = drupal_render($block);
+        $node->content['chapters'] = array(
+          '#type' => 'item',
+          '#title' => '',
+          '#markup' =>  $output,
+          '#attributes' => array('class' => array('chapters')),
+        );
+
+        $user = user_load($node->uid);
+        $output='<div class="field-user"><a href="'.url('user/'.$user->uid).'">'.$user->name.'</a></div>';
+        $node->content['user'] = array(
+          '#type' => 'item',
+          '#title' => '',
+          '#markup' =>  $output,
+          '#attributes' => array('class' => array('chapters')),
+        );
+
+
+        //
         break;
+
       default:
         break;
     }
@@ -79,7 +83,7 @@ function product_extend_node_view($node, $view_mode, $langcode) {
  */
 function product_extend_field_extra_fields() {
 
-    $extra['node']['article']['display'] = array(
+    $extra['node']['story']['display'] = array(
       'news_title' => array(
         'label' => t('Title'),
         'description' => t('Title.'),
@@ -99,120 +103,23 @@ function product_extend_field_extra_fields() {
         'label' => t('Facebook comment'),
         'description' => t('Facebook comment'),
         'weight' => 1,
+      ),
+       'chapters' => array(
+        'label' => t('chapters'),
+        'description' => t('chapters'),
+        'weight' => 1,
+      ),
+       'newest_chapters' => array(
+        'label' => t('Newest chapters'),
+        'description' => t('Newest chapters'),
+        'weight' => 1,
+      ),
+       'user' => array(
+        'label' => t('User'),
+        'description' => t('User'),
+        'weight' => 1,
       )
     );
-
-
-  $extra['node']['page']['display'] = array(
-    'news_title' => array(
-      'label' => t('Title'),
-      'description' => t('Title.'),
-      'weight' => 1,
-    ),
-    'created' => array(
-      'label' => t('Created date'),
-      'description' => t('created date.'),
-      'weight' => 1,
-    ) ,
-    'social_buttons' => array(
-      'label' => t('social_buttons'),
-      'description' => t('social_buttons'),
-      'weight' => 1,
-    ),
-    'facebook_comment' => array(
-      'label' => t('Facebook comment'),
-      'description' => t('Facebook comment'),
-      'weight' => 1,
-    )
-  );
-
-
-    $extra['node']['technical']['display'] = array(
-        'news_title' => array(
-            'label' => t('Title'),
-            'description' => t('Title.'),
-            'weight' => 1,
-        ),
-        'created' => array(
-            'label' => t('Created date'),
-            'description' => t('created date.'),
-            'weight' => 1,
-        ) ,
-        'social_buttons' => array(
-            'label' => t('social_buttons'),
-            'description' => t('social_buttons'),
-            'weight' => 1,
-        ),
-        'btn_send_request' => array(
-            'label' => t('Button sent request'),
-            'description' => t('Button sent request for buying a set product'),
-            'weight' => 1,
-        ),
-        'block_design_process' => array(
-            'label' => t('Design processing'),
-            'description' => t('Design processing'),
-            'weight' => 1,
-        ),
-        'facebook_comment' => array(
-            'label' => t('Facebook comment'),
-            'description' => t('Facebook comment'),
-            'weight' => 1,
-        )
-    );
-    $extra['node']['product']['display'] = array(
-        'news_title' => array(
-            'label' => t('Title'),
-            'description' => t('Title.'),
-            'weight' => 1,
-        ),
-        'created' => array(
-            'label' => t('Created date'),
-            'description' => t('created date.'),
-            'weight' => 1,
-        ) ,
-        'social_buttons' => array(
-            'label' => t('social_buttons'),
-            'description' => t('social_buttons'),
-            'weight' => 1,
-        ),
-        'btn_send_request' => array(
-            'label' => t('Button sent request'),
-            'description' => t('Button sent request for buying a set product'),
-            'weight' => 1,
-        ),
-        'block_design_process' => array(
-            'label' => t('Design processing'),
-            'description' => t('Design processing'),
-            'weight' => 1,
-        ),
-        'facebook_comment' => array(
-            'label' => t('Facebook comment'),
-            'description' => t('Facebook comment'),
-            'weight' => 1,
-        )
-    );
-  $extra['node']['video']['display'] = array(
-    'news_title' => array(
-      'label' => t('Title'),
-      'description' => t('Title.'),
-      'weight' => 1,
-    ),
-    'created' => array(
-      'label' => t('Created date'),
-      'description' => t('created date.'),
-      'weight' => 1,
-    ) ,
-    'social_buttons' => array(
-      'label' => t('social_buttons'),
-      'description' => t('social_buttons'),
-      'weight' => 1,
-    ),
-    'facebook_comment' => array(
-      'label' => t('Facebook comment'),
-      'description' => t('Facebook comment'),
-      'weight' => 1,
-    )
-  );
 
     return $extra;
 }

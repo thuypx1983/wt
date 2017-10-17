@@ -79,8 +79,15 @@
               <?php print render($page['help']); ?>
               <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
             </div>
+
+          <?php if ($page['hightlight']): ?>
+              <div class="hight-light">
+                <?php print render($page['hightlight']); ?>
+              </div>
+          <?php endif; ?>
+
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <section id="post-content" role="main">
                       <?php print render($page['content']); ?>
                     </section>
@@ -91,7 +98,7 @@
                     </div>
                 </div>
               <?php if ($page['sidebar_right']): ?>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                       <aside id="sidebar" class="sidebar clearfix">
                         <?php print render($page['sidebar_right']); ?>
                       </aside>

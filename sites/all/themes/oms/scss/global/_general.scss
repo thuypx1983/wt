@@ -33,13 +33,16 @@ body{
 
 .views-row{
   .row-content{
-    overflow: hidden;
-    .views-field-field-image img {
-      max-width: 100%;
 
-      -moz-transition: all 0.3s;
-      -webkit-transition: all 0.3s;
-      transition: all 0.3s;
+    .views-field-field-image {
+      overflow: hidden;
+      img {
+        max-width: 100%;
+
+        -moz-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+      }
     }
     &:hover{
       .views-field-field-image img {
@@ -70,6 +73,25 @@ select,input{
   border: none;
   padding: 5px;
 }
+
+
+select {
+  padding: 3px 10px;
+  background: transparent url('/sites/all/themes/oms/images/angle-down.png') no-repeat scroll right center;
+  border: none;
+  border-radius: 25px;
+  margin-left: 4px;
+  background-color: $color_gray !important;
+  color: $color_white;
+  /*for firefox*/
+  -moz-appearance: none;
+  /*for chrome*/
+  -webkit-appearance:none;
+}
+select::-ms-expand{
+  display: none !important;
+}
+
 .view{
   .views-exposed-form .views-exposed-widget{
     padding: 5px 5px 0px 0px;
