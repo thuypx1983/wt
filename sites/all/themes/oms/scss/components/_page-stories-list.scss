@@ -40,10 +40,14 @@
         width: 40%;
         margin-right: 15px;
       }
-      .views-field-changed,.views-field-field-author,.views-field-field-category{
+      .views-field-changed,
+      .views-field-field-author,
+      .views-field-field-category,
+      .views-field-totalcount,
+      .views-field-field-state{
         font-size: 12px;
         color: $color_gray_1;
-        margin-top: 5px;
+        margin-top: 3px;
       }
       .views-field-field-rating{
         position: absolute;
