@@ -19,7 +19,8 @@ function product_extend_node_view($node, $view_mode, $langcode) {
       '#type' => 'item',
       '#title' => 'Bình luận Facebook',
       '#markup' =>  '<div class="fb-comments" data-width="100%" data-numposts="5"></div>',
-      '#attributes' => array('class' => array('comments')),
+      '#prefix' => '<div class="facebook-comment">',
+      '#suffix' => '</div>',
     );
     $node->content['created'] = array(
       '#type' => 'item',
@@ -69,12 +70,21 @@ function product_extend_node_view($node, $view_mode, $langcode) {
         );
 
         $user = user_load($node->uid);
-        $output='<div class="field-user"><a href="'.url('user/'.$user->uid).'">'.$user->name.'</a></div>';
+        $output='<div class="field-user"><a href="'.url('user/'.$user->uid).'"><i class="fa fa-edit"></i> '.$user->name.'</a></div>';
         $node->content['user'] = array(
           '#type' => 'item',
           '#title' => '',
           '#markup' =>  $output,
-          '#attributes' => array('class' => array('chapters')),
+          '#attributes' => array('class' => array('user')),
+        );
+
+        $stats = statistics_get($node->nid);
+
+        $node->content['totalcount'] = array(
+          '#type' => 'item',
+          '#title' => '',
+          '#markup' =>  '<span class="totalcount"><i class="fa fa-eye"></i> '.$stats['totalcount'].'</span>',
+          '#attributes' => array('class' => array('user')),
         );
         //
         break;
@@ -144,6 +154,8 @@ function product_extend_node_view($node, $view_mode, $langcode) {
               '#attributes' => array('class' => array('nextprev')),
           );
           break;
+
+
       default:
         break;
     }
@@ -190,6 +202,11 @@ function product_extend_field_extra_fields() {
        'user' => array(
         'label' => t('User'),
         'description' => t('User'),
+        'weight' => 1,
+      ),
+       'totalcount' => array(
+        'label' => t('Total count viewed'),
+        'description' => t('Total count viewed'),
         'weight' => 1,
       )
     );

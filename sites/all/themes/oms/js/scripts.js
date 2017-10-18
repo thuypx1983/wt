@@ -32,46 +32,7 @@
             });
         },
         //
-        initSlick:function(){
 
-           /* $('.banner-home .view-banner .view-content').slick({
-                autoplay: true,
-                autoplaySpeed: 2000,
-                arrows: false,
-            })*/
-            $('.banner-second .view-banner .view-content').slick({
-                autoplay: true,
-                autoplaySpeed: 2000,
-                arrows: false
-            })
-            $('.related-products .view-content').slick({
-                infinite: true,
-                slidesToShow: 6,
-                slidesToScroll: 3,
-                autoplay: true,
-                autoplaySpeed: 5000,
-            })
-            $('.products-featured .view-content').slick({
-                infinite: true,
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                autoplay: true,
-                autoplaySpeed: 2000,
-                responsive: [
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 2,
-                            infinite: true,
-                        }
-                    },
-                    // You can unslick at a given breakpoint now by adding:
-                    // settings: "unslick"
-                    // instead of a settings object
-                ]
-            })
-        },
 
         autoHeight:function(){
             STNScript.equalHeight('.category-list .views-row');
@@ -84,27 +45,6 @@
         createMenuMobile:function(){
             $( "#navigation" ).clone().appendTo( ".mobile-menu-container" );
         },
-
-        /*
-         * detect star for display
-         */
-        detectStar:function() {
-            $('.views-field-field-rate').each(function () {
-                var rate = parseInt($(this).find('.field-content').text());
-                var stars_html = "";
-                if (!isNaN(rate) || rate > 1) {
-                    for (var i = 1; i <= 5; i++) {
-                        if (i <= rate) {
-                            stars_html += '<span class="star star-active"></span>';
-                        } else {
-                            stars_html += '<span class="star"></span>';
-                        }
-                    }
-                    $(this).html(stars_html);
-                }
-
-            })
-        },
          isMobile:function () {
             var w=$(window).width();
             if(w<=990){
@@ -112,23 +52,48 @@
             }
             return false;
         },
+        
+        createButtonViewChapter:function () {
+            var firstChapter="";
+            var first_row=$('.view-display-id-block_all .views-row:first');
+            var first_chapter_url="#";
+            if(first_row.length==1){
+                var first_chapter_url=first_row.find('a').attr('href');
+            }
+            var html="<div class='view-chapter'>" +
+                "<a href='#block-views-chapter-block-all'><i class='fa fa-list'></i> DS Chương</a>" +
+                "<a href=\""+first_chapter_url+"\"><i class='fa fa-eye'></i> Đọc truyện</a></div>";
+            $('.field-name-field-rating').after(html);
+        },
+
+        expanderStoryDetail:function(){
+            $('.node-full .field-name-body .field-item').expander({
+                slicePoint: 450,
+                expandEffect: 'slideDown',
+                window:5,
+                expandText:'Xem thêm',
+                userCollapseText: 'Đóng lại',
+                afterCollapse:function(){
+                    location.href = "#block-system-main";
+                }
+            });
+        }
 
     }
 
 
     $(document).ready(function(){
-        //$('#block-search-form').prepend('<span class="btn-close">x</span>')
-
-        STNScript.initSlick();
-        STNScript.detectStar();
+        STNScript.expanderStoryDetail();
+        STNScript.createButtonViewChapter();
         STNScript.createMenuMobile();
+
+
     })
     $(window).on('load',function(){
         STNScript.autoHeight();
 
         $(window).resize(function () {
             STNScript.autoHeight();
-
         })
     })
 })(jQuery)

@@ -8,6 +8,17 @@
       margin-bottom: 20px;
       margin-top: 5px;
     }
+    .category-description{
+      border: none;
+      padding-bottom: 0px;
+      margin-top: 0px;
+      margin-bottom: 15px;
+      p{
+        margin-top: 0px;
+        color: $color_gray;
+        font-style: italic;
+      }
+    }
   }
   .view-filters{
     position: absolute;

@@ -1,0 +1,20 @@
+.page-search{
+  .search-results{
+    padding: 0px;
+    margin: 0px;
+    .title{
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+    p{
+      margin-bottom: 5px;
+    };
+
+
+  }
+  #search-form{
+    input,select{
+      border: 1px solid $color_light_gray;
+    }
+  }
+}

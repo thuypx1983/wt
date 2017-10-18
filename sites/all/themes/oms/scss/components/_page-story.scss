@@ -1,0 +1,117 @@
+.node-type-story{
+  h1.content-title{
+    text-align: center;
+    margin: 0px 0px 10px 0px;
+    color: $color_red_1;
+  }
+  .node-full{
+    .form-item{
+      margin: 0px;
+      .field-item{
+        font-size: 18px;
+      }
+    }
+    .field-user{
+
+      margin-bottom: 5px;
+      a{
+        font-size: 18px;
+      }
+    }
+    .field-name-field-image{
+      margin-bottom: 15px;
+    }
+    .field-name-field-author{
+      a{
+        @include iconFontAwesome('\f007');
+      }
+    }
+    .field-name-field-category{
+      a{
+        @include iconFontAwesome('\f02c');
+      }
+    }
+    .field-name-field-state{
+      .field-item{
+        @include iconFontAwesome('\f1eb');
+      }
+    }
+    .social-buttons{
+      border: 1px dashed $color_gray_1;
+      padding: 7px;
+      text-align: center;
+    }
+    .field-name-field-rating{
+      text-align: center;
+      margin-bottom: 10px;
+      .field-label{
+        display: none;
+      }
+
+      div.fivestar-widget .star{
+        display: inline-block;
+        float: inherit;
+      }
+    }
+    .group-right{
+      .view-chapter{
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        a{
+          padding: 5px 15px;
+          background-color: $color_green;
+          color: white;
+          display: inline-block;
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+
+  .view-chapter{
+    ul{
+      li{
+        display: block;
+        border-bottom: 1px dashed $color_light_gray;
+        padding: 10px 0px 10px 0px;
+        .row-content{
+          display: table;
+          table-layout: fixed;
+          width: 100%;
+          &>div{
+            display: table-cell;
+          }
+          .views-field-created{
+            width: 100px;
+            font-size: 14px;
+            text-align: right;
+          }
+        }
+
+      }
+    }
+  }
+  .pager-load-more{
+    a{
+      padding: 5px 10px;
+      background-color: $color_yellow;
+      display: inline-block;
+    }
+  }
+  .facebook-comment{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    label{
+      border-bottom-color: #2980b9;
+      border-bottom-style: solid;
+      border-bottom-width: 2px;
+      color: #2980b9;
+      display: block;
+      font-size: 20px;
+      font-weight: 300;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+  }
+}

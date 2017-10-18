@@ -53,6 +53,21 @@
   font-size: 12px;
 }
 
+.page-search .search-results {
+  padding: 0px;
+  margin: 0px;
+}
+.page-search .search-results .title {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.page-search .search-results p {
+  margin-bottom: 5px;
+}
+.page-search #search-form input, .page-search #search-form select {
+  border: 1px solid #eee;
+}
+
 .footer {
   background-color: #333;
 }
