@@ -1,0 +1,88 @@
+.node-type-chapter{
+  .top-chapter{
+    border: 2px dotted #ccc;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    .field-name-field-story{
+      a{
+        letter-spacing: -1px;
+        font-weight: 700;
+        font-size: 22px;
+        text-transform: uppercase;
+        color: $color_red;
+
+      }
+    }
+
+    .author{
+      a{
+        color: $color_gray;
+      }
+    }
+    .created{
+      color: $color_gray;
+    }
+    .content-title{
+      font-weight: 700;
+      font-size: 17px;
+      color: #2980b9;
+      margin: 0;
+      display: inline;
+    }
+
+  }
+  .nextprev{
+    text-align: center;
+    &>a{
+      padding: 10px 25px;
+      background-color: $color_green;
+      color: $color_white;
+      margin: 10px;
+      display: inline-block;
+    }
+    .chapters-list{
+      display: inline-block;
+      .full-chapter-text{
+        position: relative;
+        display: inline-block;
+        padding-bottom: 2px;
+        span{
+          padding: 10px 25px;
+          background-color: $color_gray;
+          color:$color_white;
+          cursor: pointer;
+          display: inline-block;
+        }
+        &:hover{
+          .all-chapters{
+            display: block;
+          }
+        }
+
+        .all-chapters{
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0px;
+          height: 200px;
+          overflow-y: auto;
+          z-index: 2;
+          background-color: $color_white;
+          border: 1px solid $color_gray;
+          margin: 0px;
+          padding: 0px;
+          width: 200px;
+          li{
+            padding-left: 10px;
+            text-align: left;
+          }
+          a{
+            display: inline;
+          }
+        }
+      }
+
+    }
+  }
+}

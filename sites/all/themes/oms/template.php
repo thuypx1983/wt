@@ -1,4 +1,5 @@
 <?php
+define('CACHE_FUNCTION_TIMEOUT',3600);
 /**
  * Implements hook_html_head_alter().
  * This will overwrite the default meta character type tag with HTML5 version.
@@ -157,39 +158,109 @@ function oms_preprocess_node(&$variables) {
 }
 
 
-/**
- * @param $type
- * @param $lang
- * @param $nid
- * @return nid
- */
-
-function getNextNode($type, $lang, $nid)
+function oms_getPrevChapter($nid,$chapter_id)
 {
+    $nid=(int)$nid;
+    $chapter_id=(int)$chapter_id;
+    $static_key = "getprevchapter_{$nid}_{$chapter_id}";
 
-  $static_key = "getNextNode_{$type}_{$lang}_{$nid}";
+    // Instead of just __FUNCTION__, since this can be called many times per page load,
+    // on a different user each time
+    //$results = &drupal_static(__FUNCTION__, null);
 
+    if (!isset($results)) {
 
-  // Instead of just __FUNCTION__, since this can be called many times per page load,
-  // on a different user each time
-  //$results = &drupal_static(__FUNCTION__, null);
+        // cid pattern - modulename:datatype:id
+        $cid = $static_key;
 
-  if (!isset($results)) {
+        if ($cache = cache_get($cid)) {
+            $results = $cache->data;
+        } else {
+            // Do expensive stuff.  In this case, several MySQL queries
+            $results = db_query("
+      SELECT node.title AS node_title, node.nid AS nid, node.nid AS node_nid
+        FROM 
+        {node} node
+        LEFT JOIN {field_data_field_story} field_data_field_story ON node.nid = field_data_field_story.entity_id AND (field_data_field_story.entity_type = 'node' AND field_data_field_story.deleted = '0')
+        WHERE (( (node.status = '1') AND (node.type IN  ('chapter')) AND (field_data_field_story.field_story_target_id = '{$nid}') AND (node.nid < {$chapter_id}) ))
+        ORDER BY node_nid DESC
+        LIMIT 1 OFFSET 0
+      ")->fetchAssoc();
 
-    // cid pattern - modulename:datatype:id
-    $cid = $static_key;
-
-    if ($cache = cache_get($cid)) {
-      $results = $cache->data;
-    } else {
-      // Do expensive stuff.  In this case, several MySQL queries
-      $results = db_query("SELECT nid FROM {node} WHERE type = '{$type}' AND status=1 AND `language`='{$lang}' AND `nid` > {$nid} ORDER BY `title`  ASC  LIMIT 1")->fetchField();
-
-      // keep these stats cached for at least 60 minutes (3600 seconds)
-      cache_set($cid, $results, 'cache', time() + 3600);
+            // keep these stats cached for at least 60 minutes (3600 seconds)
+            cache_set($cid, $results, 'cache', time() + CACHE_FUNCTION_TIMEOUT);
+        }
     }
+    return $results;
+}
 
-  }
-  return $results;
 
+function oms_getNextChapter($nid,$chapter_id)
+{
+    $nid=(int)$nid;
+    $chapter_id=(int)$chapter_id;
+    $static_key = "getnextchapter_{$nid}_{$chapter_id}";
+
+    // Instead of just __FUNCTION__, since this can be called many times per page load,
+    // on a different user each time
+    //$results = &drupal_static(__FUNCTION__, null);
+
+    if (!isset($results)) {
+
+        // cid pattern - modulename:datatype:id
+        $cid = $static_key;
+
+        if ($cache = cache_get($cid)) {
+            $results = $cache->data;
+        } else {
+            // Do expensive stuff.  In this case, several MySQL queries
+            $results = db_query("
+      SELECT node.title AS node_title, node.nid AS nid, node.nid AS node_nid
+        FROM 
+        {node} node
+        LEFT JOIN {field_data_field_story} field_data_field_story ON node.nid = field_data_field_story.entity_id AND (field_data_field_story.entity_type = 'node' AND field_data_field_story.deleted = '0')
+        WHERE (( (node.status = '1') AND (node.type IN  ('chapter')) AND (field_data_field_story.field_story_target_id = '{$nid}') AND (node.nid > {$chapter_id}) ))
+        ORDER BY node_nid ASC
+        LIMIT 1 OFFSET 0
+      ")->fetchAssoc();
+
+            // keep these stats cached for at least 60 minutes (3600 seconds)
+            cache_set($cid, $results, 'cache', time() + CACHE_FUNCTION_TIMEOUT);
+        }
+
+    }
+    return $results;
+}
+
+function oms_FullListChapter($story_id)
+{
+    $nid=(int)$story_id;
+    $static_key = "getfulllistchapter_{$nid}";
+
+    // Instead of just __FUNCTION__, since this can be called many times per page load,
+    // on a different user each time
+    //$results = &drupal_static(__FUNCTION__, null);
+
+    if (!isset($results)) {
+
+        // cid pattern - modulename:datatype:id
+        $cid = $static_key;
+
+        if ($cache = cache_get($cid)) {
+            $results = $cache->data;
+        } else {
+            // Do expensive stuff.  In this case, several MySQL queries
+            $results = db_query("SELECT node.title AS node_title, node.nid AS nid, node.created AS node_created
+            FROM
+            {node} node
+            LEFT JOIN {field_data_field_story} field_data_field_story ON node.nid = field_data_field_story.entity_id AND (field_data_field_story.entity_type = 'node' AND field_data_field_story.deleted = '0')
+            WHERE (( (field_data_field_story.field_story_target_id = '{$nid}' ) )AND(( (node.status = '1') AND (node.type IN  ('chapter')) )))
+            ORDER BY node_created ASC")->fetchAllAssoc('nid');
+
+            // keep these stats cached for at least 60 minutes (3600 seconds)
+            cache_set($cid, $results, 'cache', time() + CACHE_FUNCTION_TIMEOUT);
+        }
+
+    }
+    return $results;
 }

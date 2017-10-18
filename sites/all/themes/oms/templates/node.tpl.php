@@ -103,13 +103,13 @@
     ?>
   </div>
 
-  <?php if (!empty($content['links'])): ?>
-    <footer>
+  <footer class="comment-block">
+    <span class="title">Bình luận thành viên</span>
+    <div class="comment-content">
       <?php print render($content['links']); ?>
-    </footer>
-  <?php endif; ?>
-
-  <?php print render($content['comments']); ?>
+      <?php print render($content['comments']); ?>
+    </div>
+  </footer>
 <?php if (!$page): ?>
   </article> <!-- /.node -->
 <?php endif; ?>
