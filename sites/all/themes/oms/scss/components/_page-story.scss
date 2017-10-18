@@ -1,10 +1,27 @@
 .node-type-story{
+  .block{
+    &.block-system{
+      background: transparent;
+      border: none;
+      margin-right: -10px;
+      margin-left: -10px;
+      margin-top: 0px;
+    }
+  }
   h1.content-title{
     text-align: center;
     margin: 0px 0px 10px 0px;
     color: $color_red_1;
   }
   .node-full{
+    .group-row{
+      background: #fff;
+      border: 1px solid #e1e1e1;
+      border-radius: 3px;
+      padding: 10px;
+      display: table;
+    }
+
     .form-item{
       margin: 0px;
       .field-item{
@@ -97,21 +114,41 @@
       padding: 5px 10px;
       background-color: $color_yellow;
       display: inline-block;
+      color: $color_white;
     }
   }
-  .facebook-comment{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    label{
-      border-bottom-color: #2980b9;
-      border-bottom-style: solid;
-      border-bottom-width: 2px;
-      color: #2980b9;
-      display: block;
-      font-size: 20px;
-      font-weight: 300;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
+
+  .more-link,.less-link{
+    color: $color_green;
+  }
+}
+
+.facebook-comment{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 3px;
+  padding:10px;
+  label{
+    border-bottom-color: $color_green;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    color: $color_green;
+    display: block;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+}
+
+.comment-block{
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 3px;
+  padding:10px;
+  a{
+    color: $color_green;
   }
 }
