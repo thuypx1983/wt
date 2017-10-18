@@ -58,6 +58,25 @@
 .page-search #search-form input, .page-search #search-form select {
   border: 1px solid #eee; }
 
+.field-name-field-views-story .field-label {
+  padding: 5px 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  border: 1px dashed #eee; }
+.field-name-field-views-story .views-row {
+  margin-bottom: 5px; }
+.field-name-field-views-story .view-content {
+  margin-left: -5px;
+  margin-right: -5px; }
+
+.node-type-author .form-type-item {
+  margin: 0px; }
+.node-type-author .content-title {
+  margin-top: 0px;
+  padding-top: 0px; }
+.node-type-author .comment-block {
+  display: none; }
+
 .footer {
   background-color: #333; }
 

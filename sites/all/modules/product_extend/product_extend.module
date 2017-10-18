@@ -28,14 +28,15 @@ function product_extend_node_view($node, $view_mode, $langcode) {
       '#markup' =>  '<span class="created">'.format_date($node->created,'d_m_y').'</span>',
       '#attributes' => array('class' => array('created')),
     );
+    $node->content['news_title'] = array(
+        '#type' => 'item',
+        '#title' => '',
+        '#markup' =>  '<h1 class="content-title">'.$node->title.'</h1>',
+        '#attributes' => array('class' => array('news-title')),
+    );
+
     switch ($node->type) {
       case 'story':
-        $node->content['news_title'] = array(
-          '#type' => 'item',
-          '#title' => '',
-          '#markup' =>  '<h1 class="content-title">'.$node->title.'</h1>',
-          '#attributes' => array('class' => array('news-title')),
-        );
 
         $block = block_load('views', 'chapter-block');
         $block=_block_get_renderable_array(_block_render_blocks(array($block)));
@@ -90,12 +91,6 @@ function product_extend_node_view($node, $view_mode, $langcode) {
         break;
 
       case 'chapter':
-        $node->content['news_title'] = array(
-          '#type' => 'item',
-          '#title' => '',
-          '#markup' =>  '<h1 class="content-title">'.$node->title.'</h1>',
-          '#attributes' => array('class' => array('news-title')),
-        );
         $field_story=field_get_items('node',$node,'field_story');
           $output="";
         if($field_story){
@@ -249,6 +244,29 @@ function product_extend_field_extra_fields() {
       ) ,
     );
 
+    $extra['node']['author']['display'] = array(
+        'news_title' => array(
+            'label' => t('Title'),
+            'description' => t('Title.'),
+            'weight' => 1,
+        ),
+        'created' => array(
+            'label' => t('Created date'),
+            'description' => t('created date.'),
+            'weight' => 1,
+        ),
+        'social_buttons' => array(
+            'label' => t('social_buttons'),
+            'description' => t('social_buttons'),
+            'weight' => 1,
+        ),
+        'facebook_comment' => array(
+            'label' => t('Facebook comment'),
+            'description' => t('Facebook comment'),
+            'weight' => 1,
+        ),
+    );
+
 
   return $extra;
 }
@@ -266,4 +284,16 @@ function product_extend_theme() {
       'template' => 'templates/social-buttons',
     ),
   );
+}
+
+/**
+ * @param $node
+ */
+function product_extend_node_insert($node) {
+    if($node->type=='chapter'){
+        $field_story=field_get_items('node',$node,'field_story');
+        $story=node_load($field_story[0]['target_id']);
+        $story->field_current_chapter['und'][0]['value']=$node->title;
+        node_save($story);
+    }
 }

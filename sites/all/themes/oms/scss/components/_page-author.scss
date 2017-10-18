@@ -1,0 +1,27 @@
+.field-name-field-views-story{
+  .field-label{
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    border: 1px dashed $color_light_gray;
+  }
+  .views-row{
+    margin-bottom: 5px;
+  }
+  .view-content{
+    margin-left: -5px;
+    margin-right: -5px;
+  }
+}
+.node-type-author{
+  .form-type-item{
+    margin: 0px;
+  }
+  .content-title{
+    margin-top: 0px;
+    padding-top:0px;
+  }
+  .comment-block{
+    display: none;
+  }
+}
