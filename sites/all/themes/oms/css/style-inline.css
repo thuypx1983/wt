@@ -1160,6 +1160,20 @@ select::-ms-expand {
           padding: 5px;
           display: block; }
 
+@media only screen and (max-width: 767px) {
+  .block-main-hot-story .view-filters {
+    display: none; }
+  .block-main-hot-story .slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 5px;
+    font-size: 50px;
+    z-index: 1; }
+    .block-main-hot-story .slick-arrow.fa-angle-left {
+      left: 0px; }
+    .block-main-hot-story .slick-arrow.fa-angle-right {
+      right: 0px; } }
 .view-stories-list {
   position: relative; }
   .view-stories-list .view-header {

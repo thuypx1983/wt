@@ -84,7 +84,7 @@
         STNScript.createButtonViewChapter();
         STNScript.mobileMenu();
         $('.block-main-hot-story .view-content').slick({
-            dots: true,
+            dots: false,
             infinite: true,
             speed: 1000,
             slidesToShow: 2,
