@@ -4,7 +4,6 @@ core = 7.x
 engine = phptemplate
 stylesheets[all][] = fronts/font-awesome-4.7.0/css/font-awesome.min.css
 stylesheets[all][] = color/colors.css
-stylesheets[all][] = js/pushy/css/pushy.css
 stylesheets[all][] = css/style.css
 scripts[] = js/jquery.expander.js
 scripts[] = js/scripts.js

@@ -37,10 +37,6 @@
         autoHeight:function(){
             STNScript.equalHeight('.block-highlight .views-row');
         },
-
-        createMenuMobile:function(){
-            $( "#navigation" ).clone().appendTo( ".mobile-menu-container" );
-        },
          isMobile:function () {
             var w=$(window).width();
             if(w<=990){
@@ -73,6 +69,11 @@
                     location.href = "#block-system-main";
                 }
             });
+        },
+        mobileMenu:function () {
+            $('.mobile-menu').click(function(){
+                $('.all-menu').toggleClass('open');
+            })
         }
 
     }
@@ -81,9 +82,7 @@
     $(document).ready(function(){
         STNScript.expanderStoryDetail();
         STNScript.createButtonViewChapter();
-        STNScript.createMenuMobile();
-
-
+        STNScript.mobileMenu();
     })
     $(window).on('load',function(){
         STNScript.autoHeight();
