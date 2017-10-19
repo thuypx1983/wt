@@ -32,9 +32,13 @@
         }
 
         &.search-box{
+          .container-inline{
+            padding-left: 30px;
+          }
           input[type=text]{
             border: none;
-            padding: 5px 10px 6px 10px;
+            padding: 5px 10px 5px 10px;
+            width: 40%;
           }
           input[type=submit]{
             border: none;
@@ -169,14 +173,19 @@
           &>div{
             display: table;
             &.main-menu{
-              margin-top: 160px;
+              margin-top: 175px;
               width: 100%;
               .btn-main-menu{
                 display: block;
                 width: 100%;
                 background-color: $color_green;
+                padding-top: 10px;
+                padding-bottom: 10px;
               }
               #navigation{
+                -webkit-box-shadow: none !important;
+                -moz-box-shadow: none !important;
+                box-shadow: none !important;
                 display: table;
                 ul.menu{
                   width: 100%;
@@ -189,8 +198,21 @@
             }
             &.second-menu{
               width: 100%;
-              &>nav{
+              .btn-second-menu{
                 display: block;
+                width: 100%;
+                background-color: $color_green;
+                padding-top: 10px;
+                padding-bottom: 10px;
+              }
+              &>nav{
+                -webkit-box-shadow: none !important;
+                -moz-box-shadow: none !important;
+                box-shadow: none !important;
+                display: table;
+                ul.menu{
+                  width: 100%;
+                }
               }
             }
             &.search-box{
@@ -203,20 +225,43 @@
               padding-top: 15px;
               padding-bottom: 15px;
               background-color: $color_gainsboro;
+              input.form-text{
+                width: 65%;
+                padding: 10px;
+              }
+              .form-submit{
+                background-color: $color_gray;
+                color: $color_white;
+                padding: 10px;
+              }
+              .container-inline{
+                text-align: center;
+                padding-left: 0px;
+              }
             }
             &.user-menu{
               width: 100%;
               position: absolute;
-              top: 60px;
+              top: 67px;
               left: 0px;
               width: 100%;
               &>a{
                 display: block;
                 width: 100%;
                 background-color: $color_green;
+
+                padding-top: 10px;
+                padding-bottom: 10px;
               }
               &>nav{
-                display: block;
+                -webkit-box-shadow: none !important;
+                -moz-box-shadow: none !important;
+                box-shadow: none !important;
+                display: table;
+                width: 100%;
+                ul.menu{
+                  width: 100%;
+                }
               }
             }
           }
