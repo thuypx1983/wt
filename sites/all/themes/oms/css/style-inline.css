@@ -1533,7 +1533,7 @@ select::-ms-expand {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100vw;
+    width: 100%;
     z-index: 9999;
     background-color: #fff;
   }
@@ -1547,7 +1547,7 @@ select::-ms-expand {
   }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003171}}
   .header .header-content > div.all-menu.open .all-menu-content > div.main-menu {
-    margin-top: 100px;
+    margin-top: 160px;
     width: 100%;
   }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003174}}
@@ -1582,42 +1582,39 @@ select::-ms-expand {
     width: 100%;
     padding-top: 15px;
     padding-bottom: 15px;
+    background-color: #f2f2f2;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003205}}
-  .header .header-content > div.all-menu.open .all-menu-content > div.search-box input {
-    border: 1px solid #999;
-  }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003209}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003207}}
   .header .header-content > div.all-menu.open .all-menu-content > div.user-menu {
     width: 100%;
     position: absolute;
-    top: 30px;
+    top: 60px;
     left: 0px;
     width: 100%;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003215}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003213}}
   .header .header-content > div.all-menu.open .all-menu-content > div.user-menu > a {
     display: block;
     width: 100%;
     background-color: #017ecb;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003220}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003218}}
   .header .header-content > div.all-menu.open .all-menu-content > div.user-menu > nav {
     display: block;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003228}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003226}}
   .header .header-content #logo {
     vertical-align: middle;
     width: auto;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003232}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003230}}
   .header .header-content #logo a {
     color: #fff;
     display: inline-block;
     float: left;
     padding-top: 5px;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003238}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003236}}
   .header .header-content #logo span {
     display: inline-block;
     padding: 12px 5px;
@@ -1625,31 +1622,31 @@ select::-ms-expand {
     font-size: 20px;
     font-weight: 300;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003246}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003244}}
   .header .header-content .mobile-menu {
     width: 50px;
     text-align: center;
     height: 100%;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003249}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003247}}
   .header .header-content .mobile-menu .menu-btn {
     display: inline-block;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003252}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003250}}
   .header .header-content .mobile-menu .menu-btn .fa {
     font-size: 27px;
     color: #f2f2f2;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003258}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003256}}
   .header .header-content .mobile-menu:hover {
     background-color: #eee;
     color: #f2f2f2;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003261}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003259}}
   .header .header-content .mobile-menu:hover .menu-btn {
     cursor: pointer;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003263}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_header\.scss}line{font-family:\00003261}}
   .header .header-content .mobile-menu:hover .menu-btn .fa {
     color: #333;
   }
