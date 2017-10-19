@@ -1,0 +1,27 @@
+.block-highlight{
+  .views-row{
+    text-align: center;
+    margin-bottom: 5px;
+    .views-field-title{
+      a{
+        font-weight: bold;
+      }
+    }
+    .views-field-field-current-chapter,.views-field-field-state{
+      color: $color_gray;
+    }
+  }
+  .row-info{
+    position: relative;
+    .views-field-totalcount{
+      display: inline-block;
+      position: absolute;
+      bottom: 100%;
+      right: 0px;
+      color: $color_white;
+      background-color: rgba(68, 68, 68, 0.6);
+      padding: 2px 10px;
+      font-size: 13px;
+    }
+  }
+}
