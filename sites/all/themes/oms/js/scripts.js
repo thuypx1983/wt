@@ -74,15 +74,36 @@
             $('.mobile-menu').click(function(){
                 $('.all-menu').toggleClass('open');
             })
-        }
+        },
+
 
     }
-
 
     $(document).ready(function(){
         STNScript.expanderStoryDetail();
         STNScript.createButtonViewChapter();
         STNScript.mobileMenu();
+        $('.block-main-hot-story .view-content').slick({
+            dots: false,
+            infinite: true,
+            speed: 1000,
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            mobileFirst:true,
+            prevArrow:'<i class="fa fa-angle-left"></i>',
+            nextArrow:'<i class="fa fa-angle-right"></i>',
+            responsive: [
+                {
+                    breakpoint: 767,
+                    settings: "unslick"
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+            ]
+        });
+
+
     })
     $(window).on('load',function(){
         STNScript.autoHeight();
