@@ -35,6 +35,17 @@
           display: block;
         }
       }
+      .views-field-totalcount{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        display: inline-block;
+        padding: 3px  5px;
+        background-color: rgba(68, 68, 68, 0.6);
+        color: $color_white;
+        font-size: 13px;
+        font-weight: bold;
+      }
     }
 
   }

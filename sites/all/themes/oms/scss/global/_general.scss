@@ -55,7 +55,6 @@ body{
       }
     }
   }
-
 }
 
 .text-red{
@@ -103,4 +102,20 @@ select::-ms-expand{
     }
   }
 
+}
+
+
+@include bp(max-width,$bp-tablet){
+
+  .views-row{
+
+    .views-field-field-image{
+      .field-content{
+        text-align: center;
+        a{
+          display: inline-block;
+        }
+      }
+    }
+  }
 }

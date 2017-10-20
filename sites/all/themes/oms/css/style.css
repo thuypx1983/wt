@@ -107,6 +107,88 @@
   display: none;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\000032}}
+.block-short-story .views-row {
+  width: 50%;
+  float: left;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\000036}}
+.block-short-story .views-row.views-row-1 .row-content {
+  position: relative;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\000038}}
+.block-short-story .views-row.views-row-1 .row-content .row-info {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000315}}
+.block-short-story .views-row.views-row-1 .row-content .row-info a {
+  color: #fff;
+  font-weight: bold;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000323}}
+.block-short-story .views-row:nth-child(n+2) {
+  height: 47px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000325}}
+.block-short-story .views-row:nth-child(n+2) .views-field-field-image {
+  width: 100px;
+  float: left;
+  padding-left: 10px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000331}}
+.block-short-story .views-row:nth-child(n+2) img {
+  height: 41px;
+  width: auto;
+}
+
+@media only screen and (max-width: 767px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000343}}
+  .block-short-story .views-row {
+    width: 100%;
+    float: none;
+    display: table;
+  }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000348}}
+  .block-short-story .views-row.views-row-1 .row-content {
+    position: relative;
+  }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000350}}
+  .block-short-story .views-row.views-row-1 .row-content .row-info {
+    position: inherit;
+    width: 100%;
+    bottom: 0px;
+    text-align: left;
+    padding-bottom: 20px;
+  }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000357}}
+  .block-short-story .views-row.views-row-1 .row-content .row-info a {
+    color: #333;
+    font-weight: normal;
+  }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000365}}
+  .block-short-story .views-row:nth-child(n) {
+    height: auto;
+  }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000367}}
+  .block-short-story .views-row:nth-child(n) .views-field-field-image {
+    width: 30%;
+    float: left;
+    padding-left: 0px;
+  }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000374}}
+  .block-short-story .views-row:nth-child(n) .views-field-title a {
+    padding-left: 10px;
+  }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/components\/_block-short-story\.scss}line{font-family:\0000378}}
+  .block-short-story .views-row:nth-child(n) img {
+    height: auto;
+    width: 100%;
+  }
+}
 @media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_footer\.scss}line{font-family:\000031}}
 .footer {
   background-color: #333;

@@ -77,6 +77,3 @@
 </header>
 
 <?php print render($page['header']); ?>
-
-<?php print $messages; ?>
-<div class="clearfix"></div>
