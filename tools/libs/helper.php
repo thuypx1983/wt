@@ -49,4 +49,10 @@ class helper{
     file_put_contents(ROOT_DIR.'/'.$domain.'.json',json_encode($config));
   }
 
+  function encodeTitle($title){
+      return base64_encode($this->cleanTitle($title));
+  }
+  function cleanTitle($title){
+     return trim($title);
+  }
 }
