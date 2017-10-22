@@ -12,11 +12,11 @@ $html = new simple_html_dom();
 $html->load($html_str);
 $data=array();
 
-$data['title']=strtolower($html->find('.detail h1 a',0)->plaintext);
-$data['category']=strtolower($html->find('span[itemprop=title]',1)->plaintext);
+//$data['title']=$html->find('.detail h1 a',0)->innertext;
+$data['category']=$html->find('span[itemprop=title]',1)->innertext;
 $data['image']=$html->find('.detail-thumbnail img',0)->src;
-$data['detail']=strtolower(strip_tags($html->find('.summary',0)->outertext));
-$data['author']=$html->find('.detail-info li',0)->plaintext;
+$data['detail']=strip_tags($html->find('.summary',0)->innertext);
+$data['author']=strip_tags($html->find('.detail-info li',0)->innertext);
 $data['status']=1;
 $db->where ('id',$story['id']);
 $db->update('crawl_story',$data);
@@ -28,7 +28,7 @@ $weight=1;
 foreach($html->find('#divtab',0)->find('.w3-ul li a') as $a){
     $chapters[]=array(
         'url_source'=>$a->href,
-        'title'=>$a->plaintext,
+        'title'=>strip_tags(strip_tags($a->innertext)),
         'weight'=>$weight,
         'story_id'=>$story['id'],
         'domain'=>$domain,
@@ -68,7 +68,7 @@ if(count($chapters)){
 <head>
     <script type="text/javascript">
         setTimeout(function () {
-            location.reload();
+            //location.reload();
         },300)
     </script>
 </head>

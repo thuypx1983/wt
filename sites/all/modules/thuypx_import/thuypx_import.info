@@ -1,0 +1,10 @@
+name = Thuypx import
+description = Import story.
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2015-07-08
+version = "7.x-1.0"
+core = "7.x"
+project = "import"
+datestamp = "1436393342"
+

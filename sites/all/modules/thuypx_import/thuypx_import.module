@@ -1,0 +1,166 @@
+<?php
+
+define('IMPORTED_NONE',0);
+define('IMPORTED_STORY',1);
+define('IMPORTED_STORY_CHAPTER',2);
+
+function thuypx_import_menu() {
+    $items['thuypx_import/story'] = array(
+        'type' => MENU_CALLBACK,
+        'page callback' => 'thuypx_import_story',
+        'access arguments' => array('access content'),
+    );
+    $items['thuypx_import/chapter'] = array(
+        'type' => MENU_CALLBACK,
+        'page callback' => 'thuypx_import_chapter',
+        'access arguments' => array('access content'),
+    );
+    return $items;
+}
+
+function thuypx_import_story() {
+    $databases=array (
+        'database' => 'wt_crawl',
+        'username' => 'root',
+        'password' => 'root',
+        'host' => 'localhost',
+        'port' => '',
+        'driver' => 'mysql',
+        'prefix' => '',
+    );
+
+    //get term
+    require_once DRUPAL_ROOT."/tools/libs/database/MysqliDb.php";
+    $db = new MysqliDb ($databases['host'],$databases['username'], $databases['password'],$databases['database'],3306,'utf8');
+    $db->where('status',1);
+    $db->where('imported',IMPORTED_NONE);
+    $story=$db->getOne('crawl_story');
+
+    //update status imported
+    $db->where ('id',$story['id']);
+    $db->update('crawl_story',array('imported'=>IMPORTED_STORY));
+
+
+    //taxonomy term
+    $term=taxonomy_get_term_by_name($story['category'],'category');
+    if(count($term)<1){
+        $term = new stdClass();
+        $term->name = $story['category'];
+        $term->vid = 2;
+        taxonomy_term_save($term);
+    }else{
+        $term=array_shift($term);
+    }
+
+    //author
+    $authors = node_load_multiple(NULL, array("type"=>"author","title" => $story['author']));
+    if(count($authors)<1){
+        $author = new stdClass();
+        $author->title = $story['author'];
+        $author->type = "author";
+        node_object_prepare($author);
+        node_save($author);
+    }else{
+        $author = array_shift($authors);
+    }
+
+    $node = new stdClass();
+    $node->title = $story['title'];
+    $node->type = "story";
+    node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+    $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+    $node->uid = 1;
+    $node->status = 0; //(1 or 0): published or not
+    $node->promote = 0; //(1 or 0): promoted to front page
+    $node->comment = 1; // 0 = comments disabled, 1 = read only, 2 = read/write
+
+    #image
+    $existing_filepath = $story['image'];
+    //if(file_exists($existing_filepath)){
+        $new_filepath = "public://".basename($story['image']);
+        $drupal_file = file_save_data(file_get_contents($existing_filepath), $new_filepath);
+        $drupal_file->alt = $node->title;
+        $drupal_file->title = $node->title;
+        $node->field_image[$node->language][0] = get_object_vars($drupal_file);
+    //};
+
+
+//summary
+
+    $node->body[$node->language][0]['format']  = 'full_html';
+    $node->body[$node->language][0]['value']  = $story['detail'];
+
+    $node->field_category[LANGUAGE_NONE][0]['tid']=$term->tid;
+    $node->field_author[LANGUAGE_NONE][0]['target_id']=$author->nid;
+
+    $node = node_submit($node); // Prepare node for saving
+
+
+    node_save($node);
+
+    //update status imported
+    $db->where ('id',$story['id']);
+    $db->update('crawl_story',array('nid'=>$node->nid));
+    //update story_nid on chapter table
+    $db->where ('story_id',$story['id']);
+    $db->update('crawl_story_chapter',array('story_nid'=>$node->nid));
+    echo 'done!';
+    exit();
+
+}
+
+function thuypx_import_chapter() {
+    $databases=array (
+        'database' => 'wt_crawl',
+        'username' => 'root',
+        'password' => 'root',
+        'host' => 'localhost',
+        'port' => '',
+        'driver' => 'mysql',
+        'prefix' => '',
+    );
+
+    require_once DRUPAL_ROOT."/tools/libs/helper.php";
+    require_once DRUPAL_ROOT."/tools/simplehtmldom_1_5/simple_html_dom.php";
+    require_once DRUPAL_ROOT."/tools/libs/database/MysqliDb.php";
+    $db = new MysqliDb ($databases['host'],$databases['username'], $databases['password'],$databases['database'],3306,'utf8');
+    $db->where('status',0);
+    $db->where('story_nid',0,'>');
+    $chapter=$db->getOne('crawl_story_chapter');
+
+    //update status imported
+    $db->where ('id',$chapter['id']);
+    $db->update('crawl_story_chapter',array('status'=>1));
+
+    $helper=new helper();
+
+    $html_str=$helper->curl_download($chapter['url_source']);
+    $html = new simple_html_dom();
+    $html->load($html_str);
+    $body=$html->find('#content',0)->innertext;
+    $body=preg_replace('#<script(.*?)>(.*?)</script>#is', '', $body);
+    $body=strip_tags($body,'<p><br>');
+
+    $node = new stdClass();
+    $node->title = $chapter['title'];
+    $node->type = "chapter";
+    node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+    $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+    $node->uid = 1;
+    $node->status = 1; //(1 or 0): published or not
+    $node->promote = 0; //(1 or 0): promoted to front page
+    $node->comment = 1; // 0 = comments disabled, 1 = read only, 2 = read/write
+
+    $node->body[$node->language][0]['format']  = 'full_html';
+    $node->body[$node->language][0]['value']  = $body;
+
+    $node->field_weight[LANGUAGE_NONE][0]['value']=$chapter['weight'];
+    $node->field_story[LANGUAGE_NONE][0]['target_id']=$chapter['story_nid'];
+
+    $node = node_submit($node); // Prepare node for saving
+    node_save($node);
+
+    echo 'done!';
+    exit();
+
+}
