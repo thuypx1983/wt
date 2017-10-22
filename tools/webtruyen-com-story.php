@@ -62,16 +62,5 @@ if($last_page){
 if(count($chapters)){
     $db->insertMulti('crawl_story_chapter', $chapters);
 }
-?>
-
-<html>
-<head>
-    <script type="text/javascript">
-        setTimeout(function () {
-            //location.reload();
-        },300)
-    </script>
-</head>
-<body>Done crawl <?php echo $story['url_source'], ' Chapters: '.count($chapters)?></body>
-</html>
+echo done;
 
