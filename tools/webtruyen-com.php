@@ -47,15 +47,5 @@ foreach($html->find('.list-content .list-caption a') as $a)
       $db->insert('crawl_story',$data);
   }
 }
-?>
-<html>
-<head>
-    <script type="text/javascript">
-        setTimeout(function () {
-            //location.reload();
-        },300)
-    </script>
-</head>
-<body>Done crawl <?php echo $story['url_source'], ' Chapters: '.count($chapters)?></body>
-</html>
+echo 'done';
 
