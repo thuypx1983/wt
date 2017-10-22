@@ -62,5 +62,5 @@ if($last_page){
 if(count($chapters)){
     $db->insertMulti('crawl_story_chapter', $chapters);
 }
-echo done;
+echo "done";
 
