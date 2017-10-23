@@ -124,9 +124,15 @@ function thuypx_import_chapter() {
     require_once DRUPAL_ROOT."/tools/simplehtmldom_1_5/simple_html_dom.php";
     require_once DRUPAL_ROOT."/tools/libs/database/MysqliDb.php";
     $db = new MysqliDb ($databases['host'],$databases['username'], $databases['password'],$databases['database'],3306,'utf8');
+
     $db->where('status',0);
     $db->where('story_nid',0,'>');
+    if(isset($_GET['start_id'])){
+      $start_id=(int)$_GET['start_id'];
+      $db->where('id',$start_id,'>');
+    }
     $chapter=$db->getOne('crawl_story_chapter');
+
 
     //update status imported
     $db->where ('id',$chapter['id']);
@@ -160,7 +166,7 @@ function thuypx_import_chapter() {
     $node = node_submit($node); // Prepare node for saving
     node_save($node);
 
-    echo 'done!';
+    echo 'chapter: '.$chapter['id'].' done!';
     exit();
 
 }
