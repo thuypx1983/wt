@@ -20,9 +20,9 @@ function thuypx_import_menu() {
 
 function thuypx_import_story() {
     $databases=array (
-        'database' => 'wt_crawl',
-        'username' => 'root',
-        'password' => 'root',
+        'database' => 'truyenthegioi_com',
+        'username' => 'truyenthegioi_co',
+        'password' => 'Sta9D3#23tM9aj',
         'host' => 'localhost',
         'port' => '',
         'driver' => 'mysql',
@@ -35,6 +35,12 @@ function thuypx_import_story() {
     $db->where('status',1);
     $db->where('imported',IMPORTED_NONE);
     $story=$db->getOne('crawl_story');
+        
+    if(!$story){
+        echo "complete";
+        return;
+        exit();
+    }     
 
     //update status imported
     $db->where ('id',$story['id']);
@@ -70,9 +76,9 @@ function thuypx_import_story() {
     node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
     $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
     $node->uid = 1;
-    $node->status = 0; //(1 or 0): published or not
+    $node->status = 1; //(1 or 0): published or not
     $node->promote = 0; //(1 or 0): promoted to front page
-    $node->comment = 1; // 0 = comments disabled, 1 = read only, 2 = read/write
+    $node->comment = 2; // 0 = comments disabled, 1 = read only, 2 = read/write
 
     #image
     $existing_filepath = $story['image'];
@@ -111,9 +117,9 @@ function thuypx_import_story() {
 
 function thuypx_import_chapter() {
     $databases=array (
-        'database' => 'wt_crawl',
-        'username' => 'root',
-        'password' => 'root',
+        'database' => 'truyenthegioi_com',
+        'username' => 'truyenthegioi_co',
+        'password' => 'Sta9D3#23tM9aj',
         'host' => 'localhost',
         'port' => '',
         'driver' => 'mysql',
@@ -132,6 +138,12 @@ function thuypx_import_chapter() {
       $db->where('id',$start_id,'>');
     }
     $chapter=$db->getOne('crawl_story_chapter');
+    
+    if(!$chapter){
+        echo "complete";
+        return;
+        exit();
+    }
 
 
     //update status imported
@@ -155,7 +167,7 @@ function thuypx_import_chapter() {
     $node->uid = 1;
     $node->status = 1; //(1 or 0): published or not
     $node->promote = 0; //(1 or 0): promoted to front page
-    $node->comment = 1; // 0 = comments disabled, 1 = read only, 2 = read/write
+    $node->comment = 2; // 0 = comments disabled, 1 = read only, 2 = read/write
 
     $node->body[$node->language][0]['format']  = 'full_html';
     $node->body[$node->language][0]['value']  = $body;
