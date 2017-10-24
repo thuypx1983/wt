@@ -1,0 +1,734 @@
+diff --git a/metatag.admin.inc b/metatag.admin.inc
+index 649861d..1ece5c6 100644
+--- a/metatag.admin.inc
++++ b/metatag.admin.inc
+@@ -776,6 +776,32 @@ function metatag_admin_settings_form() {
+     '#default_value' => variable_get('metatag_token_sanitize', FALSE),
+   );
+ 
++  $form['lengths'] = array(
++    '#type' => 'fieldset',
++    '#title' => t('Maximum meta tag lengths'),
++    '#collapsible' => TRUE,
++    '#collapsed' => TRUE,
++    '#description' => t('Many meta tags may be shortened to a certain length. To reset to the default, leave the field blank. To keep the entire meta tag, regardless of length, set the value to zero (0). Note: the meta tag will be shortened <em>after</em> the tokens have been replaced, not before.'),
++  );
++  $info = metatag_get_info();
++  $groups = $info['groups'];
++  $tags = $info['tags'];
++  foreach ($tags as $tag => $info) {
++    if (isset($info['maxlength'])) {
++      $default = $info['maxlength'];
++      $var_name = 'metatag_maxlength_' . $tag;
++      $title = $info['label'];
++      if (!empty($info['group']) && isset($groups[$info['group']])) {
++        $title = $groups[$info['group']]['label'] . ': ' . $title;
++      }
++      $form['lengths'][$var_name] = array(
++        '#type' => 'textfield',
++        '#title' => $title,
++        '#default_value' => intval(variable_get($var_name, $default)),
++      );
++    }
++  }
++
+   // Extra submission logic.
+   $form['#submit'][] = 'metatag_admin_settings_form_submit';
+ 
+@@ -785,8 +811,21 @@ function metatag_admin_settings_form() {
+ /**
+  * Form API submission callback for metatag_admin_settings_form().
+  */
+-function metatag_admin_settings_form_submit() {
+-  cache_clear_all('entity_info:', 'cache', TRUE);
++function metatag_admin_settings_form_submit($form, &$form_state) {
++  // Only keep maxlength values that are numeric. Any empty, non-zero values
++  // will be removed.
++  foreach ($form_state['values'] as $name => $value) {
++    if (strpos($name, 'metatag_maxlength_') !== FALSE) {
++      if ((empty($value) && $value !== 0 && $value !== '0') || !is_numeric($value)) {
++        unset($form_state['values'][$name]);
++        variable_del($name);
++      }
++      else {
++        $form_state['values'][$name] = intval($value);
++      }
++    }
++  }
++
+   cache_clear_all('*', 'cache_metatag', TRUE);
+-  drupal_set_message(t('The Metatag cache has been cleared, so all meta tags can be reloaded.'));
++  drupal_set_message(t('The Metatag cache has been cleared so all meta tags can be reloaded.'));
+ }
+diff --git a/metatag.api.php b/metatag.api.php
+index f356140..e8d0d45 100644
+--- a/metatag.api.php
++++ b/metatag.api.php
+@@ -214,6 +214,11 @@ function hook_metatag_config_delete($config) {
+  *     'url' - If set to TRUE, relative paths will be converted to absolute.
+  *     'is_language' - If set to TRUE, will not allow the Drupal default
+  *       language value "und" to be output.
++ *     'maxlength' - If set to a numeric value, meta tag values will be trimmed
++ *       to this limit, which may be overridden via the settings page. Note: any
++ *       meta tags with this value assigned can have its maxlength controlled,
++ *       so setting the attribute to an empty string will allow site builders to
++ *       adjust the meta tag lengths as needed.
+  *     'select_or_other' - If set to TRUE, form[#type] is set to 'select' and
+  *       the "select_or_other" module is available, that module will be used to
+  *       provide a text field to manually insert another option.
+diff --git a/metatag.inc b/metatag.inc
+index 09bef4e..09fec7f 100644
+--- a/metatag.inc
++++ b/metatag.inc
+@@ -7,20 +7,20 @@
+ interface DrupalMetaTagInterface {
+ 
+   /**
+-   * Constructor
++   * Constructor.
+    *
+    * @param array $info
+    *   The information about the meta tag from metatag_get_info().
+    */
+   function __construct(array $info, array $data = array());
+ 
+-  function getForm();
++  public function getForm();
+ 
+   //function validateForm();
+ 
+   //function processForm();
+ 
+-  function getValue();
++  public function getValue();
+ 
+   function getWeight();
+ 
+@@ -30,6 +30,12 @@ function tidyValue($value);
+ 
+   function convertUrlToAbsolute($url);
+ 
++  function truncate($value);
++
++  function maxlength();
++
++  static function text_summary($text, $size);
++
+ }
+ 
+ class DrupalDefaultMetaTag implements DrupalMetaTagInterface {
+@@ -48,9 +54,10 @@ function __construct(array $info, array $data = NULL) {
+   /**
+    * Calculate the weight of this meta tag.
+    *
+-   * @return integer
++   * @return int
++   *   Weight.
+    */
+-  public function getWeight() {
++  function getWeight() {
+     static $counter = 0;
+ 
+     // If no weight value is found, stack this meta tag at the end.
+@@ -86,7 +93,7 @@ public function getValue(array $options = array()) {
+     // options as the context so it can be handled appropriately.
+     $value = metatag_translate_metatag($value, $this->info['name'], $options, NULL, TRUE);
+ 
+-    return $value;
++    return $this->truncate($this->tidyValue($this->data['value']));
+   }
+ 
+   /**
+@@ -156,7 +163,7 @@ public function getElement(array $options = array()) {
+   /**
+    * Remove unwanted formatting from a meta tag.
+    *
+-   * @param $value string
++   * @param string $value
+    *   The meta tag value to be tidied up.
+    *
+    * @return string
+@@ -219,6 +226,154 @@ function convertUrlToAbsolute($url) {
+     return file_create_url($url);
+   }
+ 
++  /**
++   * Shorten a string to a certain length using text_summary().
++   *
++   * @param string $value
++   *   String to shorten.
++   *
++   * @return string
++   *   Shortened string.
++   */
++  function truncate($value) {
++    $maxlength = $this->maxlength();
++
++    if (!empty($value) && $maxlength > 0) {
++      $value = $this->text_summary($value, $maxlength);
++    }
++
++    return $value;
++  }
++
++  /**
++   * Identify the maximum length of which strings will be allowed.
++   *
++   * @return int
++   *   Maxlenght.
++   */
++  function maxlength() {
++    if (isset($this->info['maxlength'])) {
++      return intval(variable_get('metatag_maxlength_' . $this->info['name'], $this->info['maxlength']));
++    }
++    return 0;
++  }
++
++  /**
++   * Copied from text.module with the following changes:
++   *
++   * Change 1: $size is required.
++   * Change 2: $format is removed.
++   * Change 3: Don't trim at the end of short sentences
++   *   (https://www.drupal.org/node/1620104).
++   * Change 4: Word boundaries (https://www.drupal.org/node/1482178).
++   * Change 5: Trim the final string.
++   */
++  static function text_summary($text, $size) {
++    // if (!isset($size)) {
++    //   // What used to be called 'teaser' is now called 'summary', but
++    //   // the variable 'teaser_length' is preserved for backwards compatibility.
++    //   $size = variable_get('teaser_length', 600);
++    // }
++
++    // Find where the delimiter is in the body
++    $delimiter = strpos($text, '<!--break-->');
++
++    // If the size is zero, and there is no delimiter,
++    // the entire body is the summary.
++    if ($size == 0 && $delimiter === FALSE) {
++      return $text;
++    }
++
++    // If a valid delimiter has been specified, use it to chop off the summary.
++    if ($delimiter !== FALSE) {
++      return substr($text, 0, $delimiter);
++    }
++
++    // We check for the presence of the PHP evaluator filter in the current
++    // format. If the body contains PHP code, we do not split it up to prevent
++    // parse errors.
++    // if (isset($format)) {
++    //   $filters = filter_list_format($format);
++    //   if (isset($filters['php_code']) && $filters['php_code']->status && strpos($text, '<?') !== FALSE) {
++    //     return $text;
++    //   }
++    // }
++
++    // If we have a short body, the entire body is the summary.
++    if (drupal_strlen($text) <= $size) {
++      return $text;
++    }
++
++    // If the delimiter has not been specified, try to split at paragraph or
++    // sentence boundaries.
++
++    // The summary may not be longer than maximum length specified.
++    // Initial slice.
++    $summary = truncate_utf8($text, $size);
++
++    // Store the actual length of the UTF8 string -- which might not be the same
++    // as $size.
++    $max_rpos = strlen($summary);
++
++    // How much to cut off the end of the summary so that it doesn't end in the
++    // middle of a paragraph, sentence, or word.
++    // Initialize it to maximum in order to find the minimum.
++    $min_rpos = $max_rpos;
++
++    // Store the reverse of the summary. We use strpos on the reversed needle
++    // and haystack for speed and convenience.
++    $reversed = strrev($summary);
++
++    // Build an array of arrays of break points grouped by preference.
++    $break_points = array();
++
++    // A paragraph near the end of sliced summary is most preferable.
++    $break_points[] = array('</p>' => 0);
++
++    // If no complete paragraph then treat line breaks as paragraphs.
++    // $line_breaks = array('<br />' => 6, '<br>' => 4);
++    // Newline only indicates a line break if line break converter
++    // filter is present.
++    // if (isset($filters['filter_autop'])) {
++    //   $line_breaks["\n"] = 1;
++    // }
++    // $break_points[] = $line_breaks;
++
++    // If the first paragraph is too long, split at the end of a sentence.
++    // $break_points[] = array('. ' => 1, '! ' => 1, '? ' => 1, '。' => 0, '؟ ' => 1);
++
++    // From https://www.drupal.org/node/1482178.
++    // If the first sentence is too long, split at the first word break.
++    $word_breaks = array(' ' => 0, "\t" => 0);
++    $break_points[] = $word_breaks;
++
++    // Iterate over the groups of break points until a break point is found.
++    foreach ($break_points as $points) {
++      // Look for each break point, starting at the end of the summary.
++      foreach ($points as $point => $offset) {
++        // The summary is already reversed, but the break point isn't.
++        $rpos = strpos($reversed, strrev($point));
++        if ($rpos !== FALSE) {
++          $min_rpos = min($rpos + $offset, $min_rpos);
++        }
++      }
++
++      // If a break point was found in this group, slice and stop searching.
++      if ($min_rpos !== $max_rpos) {
++        // Don't slice with length 0. Length must be <0 to slice from RHS.
++        $summary = ($min_rpos === 0) ? $summary : substr($summary, 0, 0 - $min_rpos);
++        break;
++      }
++    }
++
++    // If the htmlcorrector filter is present, apply it to the generated summary.
++    // if (isset($filters['filter_htmlcorrector'])) {
++    //   $summary = _filter_htmlcorrector($summary);
++    // }
++
++    return trim($summary);
++  }
++
+ }
+ 
+ /**
+@@ -251,6 +406,12 @@ public function getForm(array $options = array()) {
+       $form['value']['#description'] .= ' ' . t('Multiple values may be used, separated by a comma. Note: Tokens that return multiple values will be handled automatically.');
+     }
+ 
++    // Optionally limit the field to a certain length.
++    $maxlength = $this->maxlength();
++    if (!empty($maxlength)) {
++      $form['value']['#description'] .= ' ' . t('This will be truncated to a maximum of %max characters.', array('%max' => $maxlength));
++    }
++
+     // Optional handling for images.
+     if (!empty($this->info['image'])) {
+       $form['value']['#description'] .= ' ' . t('This will be able to extract the URL from an image field.');
+@@ -354,8 +515,12 @@ public function getValue(array $options = array()) {
+       $value = implode(',', $values);
+     }
+ 
++    // Clean up the string a bit.
+     $value = $this->tidyValue($value);
+ 
++    // Optionally truncate the value.
++    $value = $this->truncate($value);
++
+     // Translate the final output string prior to output. Use the
+     // 'output' i18n_string object type, and pass along the meta tag's
+     // options as the context so it can be handled appropriately.
+@@ -394,7 +559,9 @@ public function getElement(array $options = array()) {
+     if (!isset($this->info['header']) || !empty($this->info['header'])) {
+       // Also send the generator in the HTTP header.
+       // @todo This does not support 'rev' or alternate link headers.
+-      $element['#attached']['drupal_add_http_header'][] = array('Link', '<' . $value . '>;' . drupal_http_header_attributes(array('rel' => $element['#name'])), TRUE);
++      $element['#attached']['drupal_add_http_header'][] = array(
++        'Link', '<' . $value . '>;' . drupal_http_header_attributes(array('rel' => $element['#name'])), TRUE,
++      );
+     }
+ 
+     return array(
+@@ -418,8 +585,16 @@ class DrupalTitleMetaTag extends DrupalTextMetaTag {
+   public function getElement(array $options = array()) {
+     $element = array();
+     if ($value = $this->getValue($options)) {
+-      $element['#attached']['metatag_set_preprocess_variable'][] = array('html', 'head_title', $value);
+-      $element['#attached']['metatag_set_preprocess_variable'][] = array('html', 'head_array', array('title' => $value));
++      $element['#attached']['metatag_set_preprocess_variable'][] = array(
++        'html',
++        'head_title',
++        $value,
++      );
++      $element['#attached']['metatag_set_preprocess_variable'][] = array(
++        'html',
++        'head_array',
++        array('title' => $value),
++      );
+     }
+     return $element;
+   }
+diff --git a/metatag.install b/metatag.install
+index ee71058..ed2475d 100644
+--- a/metatag.install
++++ b/metatag.install
+@@ -475,6 +475,13 @@ function metatag_uninstall() {
+       }
+     }
+   }
++
++  // Remove all of the maxlength variables.
++  variable_del('metatag_maxlength_title');
++  variable_del('metatag_maxlength_description');
++  variable_del('metatag_maxlength_abstract');
++  variable_del('metatag_maxlength_keywords');
++  variable_del('metatag_maxlength_news_keywords');
+ }
+ 
+ /**
+diff --git a/metatag.metatag.inc b/metatag.metatag.inc
+index 325026f..fe9f42d 100644
+--- a/metatag.metatag.inc
++++ b/metatag.metatag.inc
+@@ -150,6 +150,7 @@ function metatag_metatag_info() {
+   $info['tags']['title'] = array(
+     'label' => t('Page title'),
+     'description' => t("The text to display in the title bar of a visitor's web browser when they view this page. This meta tag may also be used as the title of the page when a visitor bookmarks or favorites this page."),
++    'maxlength' => 0,
+     'class' => 'DrupalTitleMetaTag',
+     'group' => 'basic',
+     'weight' => ++$weight,
+@@ -158,6 +159,7 @@ function metatag_metatag_info() {
+   $info['tags']['description'] = array(
+     'label' => t('Description'),
+     'description' => t("A brief and concise summary of the page's content, preferably 150 characters or less. The description meta tag may be used by search engines to display a snippet about the page in search results."),
++    'maxlength' => 380,
+     'class' => 'DrupalTextMetaTag',
+     'group' => 'basic',
+     'weight' => ++$weight,
+@@ -171,6 +173,7 @@ function metatag_metatag_info() {
+   $info['tags']['abstract'] = array(
+     'label' => t('Abstract'),
+     'description' => t("A brief and concise summary of the page's content, preferably 150 characters or less. Where as the description meta tag may be used by search engines to display a snippet about the page in search results, the abstract tag may be used to archive a summary about the page. This meta tag is <em>no longer</em> supported by major search engines."),
++    'maxlength' => 0,
+     'class' => 'DrupalTextMetaTag',
+     'group' => 'basic',
+     'weight' => ++$weight,
+@@ -184,6 +187,7 @@ function metatag_metatag_info() {
+   $info['tags']['keywords'] = array(
+     'label' => t('Keywords'),
+     'description' => t("A comma-separated list of keywords about the page. This meta tag is <em>not</em> supported by most search engines anymore."),
++    'maxlength' => 0,
+     'class' => 'DrupalTextMetaTag',
+     'group' => 'basic',
+     'weight' => ++$weight,
+@@ -215,6 +219,7 @@ function metatag_metatag_info() {
+   $info['tags']['news_keywords'] = array(
+     'label' => t('Google News Keywords'),
+     'description' => t('A comma-separated list of keywords about the page. This meta tag is used as an indicator in <a href="@google_news">Google News</a>.', array('@google_news' => 'http://support.google.com/news/publisher/bin/answer.py?hl=en&answer=68297')),
++    'maxlength' => 0,
+     'class' => 'DrupalTextMetaTag',
+     'group' => 'advanced',
+     'weight' => ++$weight,
+diff --git a/metatag.variable.inc b/metatag.variable.inc
+index ea7b001..ca5039c 100644
+--- a/metatag.variable.inc
++++ b/metatag.variable.inc
+@@ -8,7 +8,6 @@
+  * Implements hook_variable_info().
+  */
+ function metatag_variable_info($options) {
+-
+   $variables['metatag_pager_string'] = array(
+     'title' => t('Custom pager string', array(), $options),
+     'type' => 'string',
+@@ -19,6 +18,29 @@ function metatag_variable_info($options) {
+     'multidomain' => TRUE,
+   );
+ 
++  $info = metatag_get_info();
++  $groups = $info['groups'];
++  $tags = $info['tags'];
++  foreach ($tags as $tag => $info) {
++    if (isset($info['maxlength'])) {
++      $default = $info['maxlength'];
++      $var_name = 'metatag_maxlength_' . $tag;
++      $title = $info['label'];
++      if (!empty($info['group']) && isset($groups[$info['group']])) {
++        $title = $groups[$info['group']]['label'] . ': ' . $title;
++      }
++      $variables[$var_name] = array(
++        'title' => t('Maximum length for @tag', array('@tag' => $title), $options),
++        'type' => 'string',
++        'description' => t('Controls the maximum length of the @tag meta tag, values longer than this will be truncated. If set to "0" the maximum length will be ignored.', array('@tag' => $title), $options),
++        'default' => intval(variable_get($var_name, $default)),
++        'group' => 'metatag',
++        'localize' => TRUE,
++        'multidomain' => TRUE,
++      );
++    }
++  }
++
+   return $variables;
+ }
+ 
+diff --git a/metatag_dc/metatag_dc.install b/metatag_dc/metatag_dc.install
+index 71c5abb..e3e0f5b 100644
+--- a/metatag_dc/metatag_dc.install
++++ b/metatag_dc/metatag_dc.install
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * @file
+- * Installation and update scripts for metatag_dc_advanced.
++ * Installation and update scripts for metatag_dc.
+  */
+ 
+ /**
+@@ -10,3 +10,12 @@
+ function metatag_dc_update_7100() {
+   drupal_set_message(t('The Dublic Core Additional Tags meta tags have been moved into the new "Metatag: Dublin Core Advanced" submodule.'));
+ }
++
++/**
++ * Implements hook_uninstall().
++ */
++function metatag_dc_uninstall() {
++  // Remove all of the maxlength variables.
++  variable_del('metatag_maxlength_dcterms.subject');
++  variable_del('metatag_maxlength_dcterms.description');
++}
+diff --git a/metatag_dc/metatag_dc.metatag.inc b/metatag_dc/metatag_dc.metatag.inc
+index ae0a7c8..c385e1c 100644
+--- a/metatag_dc/metatag_dc.metatag.inc
++++ b/metatag_dc/metatag_dc.metatag.inc
+@@ -107,11 +107,13 @@ function metatag_dc_metatag_info() {
+   $info['tags']['dcterms.subject'] = array(
+     'label' => t('Subject'),
+     'description' => t('The topic of the resource. Typically, the subject will be represented using keywords, key phrases, or classification codes. Recommended best practice is to use a controlled vocabulary. To describe the spatial or temporal topic of the resource, use the Coverage element.'),
++    'maxlength' => 0,
+     'weight' => ++$weight,
+   ) + $defaults;
+   $info['tags']['dcterms.description'] = array(
+     'label' => t('Description'),
+     'description' => t('An account of the resource. Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource.'),
++    'maxlength' => 0,
+     'weight' => ++$weight,
+   ) + $defaults;
+   $info['tags']['dcterms.publisher'] = array(
+diff --git a/metatag_dc_advanced/metatag_dc_advanced.install b/metatag_dc_advanced/metatag_dc_advanced.install
+new file mode 100644
+index 0000000..7faf5b3
+--- /dev/null
++++ b/metatag_dc_advanced/metatag_dc_advanced.install
+@@ -0,0 +1,14 @@
++<?php
++/**
++ * @file
++ * Installation and update scripts for metatag_dc_advanced.
++ */
++
++/**
++ * Implements hook_uninstall().
++ */
++function metatag_dc_advanced_uninstall() {
++  // Remove all of the maxlength variables.
++  variable_del('metatag_maxlength_dcterms.abstract');
++  variable_del('metatag_maxlength_dcterms.alternative');
++}
+diff --git a/metatag_dc_advanced/metatag_dc_advanced.metatag.inc b/metatag_dc_advanced/metatag_dc_advanced.metatag.inc
+index 1fe3a6d..016485b 100644
+--- a/metatag_dc_advanced/metatag_dc_advanced.metatag.inc
++++ b/metatag_dc_advanced/metatag_dc_advanced.metatag.inc
+@@ -48,6 +48,7 @@ function metatag_dc_advanced_metatag_info() {
+   $info['tags']['dcterms.abstract'] = array(
+     'label' => t('Abstract'),
+     'description' => t('A summary of the resource.'),
++    'maxlength' => 0,
+     'weight' => ++$weight,
+   ) + $defaults;
+   $info['tags']['dcterms.accessRights'] = array(
+@@ -73,6 +74,7 @@ function metatag_dc_advanced_metatag_info() {
+   $info['tags']['dcterms.alternative'] = array(
+     'label' => t('Alternative Title'),
+     'description' => t('An alternative name for the resource.'),
++    'maxlength' => 0,
+     'weight' => ++$weight,
+   ) + $defaults;
+   $info['tags']['dcterms.audience'] = array(
+diff --git a/metatag_google_plus/metatag_google_plus.install b/metatag_google_plus/metatag_google_plus.install
+index 9e569fe..f88f876 100644
+--- a/metatag_google_plus/metatag_google_plus.install
++++ b/metatag_google_plus/metatag_google_plus.install
+@@ -22,3 +22,11 @@ function metatag_google_plus_install() {
+ function metatag_google_plus_update_7100() {
+   drupal_set_message(t("Note that the template's html.tpl.php must be updated in order for the Metatag: Google+ module to work correctly. Please see its README.txt file for details."));
+ }
++
++/**
++ * Implements hook_uninstall().
++ */
++function metatag_google_plus_uninstall() {
++  // Remove all of the maxlength variables.
++  variable_del('metatag_maxlength_itemprop:description');
++}
+diff --git a/metatag_google_plus/metatag_google_plus.metatag.inc b/metatag_google_plus/metatag_google_plus.metatag.inc
+index ed9a047..aabb244 100644
+--- a/metatag_google_plus/metatag_google_plus.metatag.inc
++++ b/metatag_google_plus/metatag_google_plus.metatag.inc
+@@ -111,11 +111,13 @@ function metatag_google_plus_metatag_info() {
+   $info['tags']['itemprop:name'] = array(
+     'label' => t('Title'),
+     'description' => t('A Google+ title for the page being shared. Keep keywords towards the front.'),
++    'maxlength' => 0,
+     'weight' => ++$weight,
+   ) + $defaults;
+   $info['tags']['itemprop:description'] = array(
+     'label' => t('Description'),
+     'description' => t('Longer form description, you’ve 200 words here that can specifically reference your presence on Google+'),
++    'maxlength' => 0,
+     'weight' => ++$weight,
+   ) + $defaults;
+   $info['tags']['itemprop:image'] = array(
+diff --git a/metatag_opengraph/metatag_opengraph.install b/metatag_opengraph/metatag_opengraph.install
+index abe78df..299f57c 100644
+--- a/metatag_opengraph/metatag_opengraph.install
++++ b/metatag_opengraph/metatag_opengraph.install
+@@ -48,6 +48,15 @@ function metatag_opengraph_update_dependencies() {
+ }
+ 
+ /**
++ * Implements hook_uninstall().
++ */
++function metatag_opengraph_uninstall() {
++  // Remove all of the maxlength variables.
++  variable_del('metatag_maxlength_og:title');
++  variable_del('metatag_maxlength_og:description');
++}
++
++/**
+  * Implementations of hook_update_N().
+  */
+ 
+diff --git a/metatag_opengraph/metatag_opengraph.metatag.inc b/metatag_opengraph/metatag_opengraph.metatag.inc
+index 784b97d..d383997 100644
+--- a/metatag_opengraph/metatag_opengraph.metatag.inc
++++ b/metatag_opengraph/metatag_opengraph.metatag.inc
+@@ -132,6 +132,7 @@ function metatag_opengraph_metatag_info() {
+   $info['tags']['og:title'] = array(
+     'label' => t('Content title'),
+     'description' => t('The title of the content, e.g., <em>The Rock</em>.'),
++    'maxlength' => 0,
+     'weight' => ++$weight,
+   ) + $og_defaults;
+ 
+@@ -157,6 +158,7 @@ function metatag_opengraph_metatag_info() {
+   $info['tags']['og:description'] = array(
+     'label' => t('Content description'),
+     'description' => t('A one to two sentence description of the content.'),
++    'maxlength' => 0,
+     'weight' => ++$weight,
+   ) + $og_defaults;
+ 
+diff --git a/metatag_twitter_cards/metatag_twitter_cards.install b/metatag_twitter_cards/metatag_twitter_cards.install
+index d2ae377..261ba5b 100644
+--- a/metatag_twitter_cards/metatag_twitter_cards.install
++++ b/metatag_twitter_cards/metatag_twitter_cards.install
+@@ -17,6 +17,15 @@ function metatag_twitter_cards_update_dependencies() {
+ }
+ 
+ /**
++ * Implements hook_uninstall().
++ */
++function metatag_twitter_cards_uninstall() {
++  // Remove all of the maxlength variables.
++  variable_del('metatag_maxlength_twitter:title');
++  variable_del('metatag_maxlength_twitter:description');
++}
++
++/**
+  * Implementations of hook_update_N().
+  */
+ 
+diff --git a/metatag_twitter_cards/metatag_twitter_cards.metatag.inc b/metatag_twitter_cards/metatag_twitter_cards.metatag.inc
+index 10f962e..628d5c6 100644
+--- a/metatag_twitter_cards/metatag_twitter_cards.metatag.inc
++++ b/metatag_twitter_cards/metatag_twitter_cards.metatag.inc
+@@ -150,11 +150,13 @@ function metatag_twitter_cards_metatag_info() {
+   $info['tags']['twitter:title'] = array(
+     'label' => t('Title'),
+     'description' => t('The page\'s title, which should be concise; it will be truncated at 70 characters by Twitter. This field is required unless this the \'type\' field is set to "photo".'),
++    'maxlength' => 70,
+     'weight' => ++$weight,
+   ) + $defaults;
+   $info['tags']['twitter:description'] = array(
+     'label' => t('Description'),
+     'description' => t('A description that concisely summarizes the content of the page, as appropriate for presentation within a Tweet. Do not re-use the title text as the description, or use this field to describe the general services provided by the website. The string will be truncated, by Twitter, at the word to 200 characters.'),
++    'maxlength' => 200,
+     'weight' => ++$weight,
+   ) + $defaults;
+   $info['tags']['twitter:image'] = array(
+diff --git a/tests/metatag.helper.test b/tests/metatag.helper.test
+index db1d103..74f5e2a 100644
+--- a/tests/metatag.helper.test
++++ b/tests/metatag.helper.test
+@@ -25,6 +25,10 @@ function setUp(array $modules = array()) {
+     $modules[] = 'ctools';
+     $modules[] = 'token';
+ 
++    // Used for the tests.
++    $modules[] = 'devel';
++    $modules[] = 'devel_generate';
++
+     // Metatag modules. Only enable the main module, submodules will be tested
+     // separately.
+     $modules[] = 'metatag';
+@@ -55,7 +59,7 @@ protected function verbose($message, $title = NULL) {
+   /**
+    * Load the Performance admin page and clear all caches.
+    */
+-  function clearAllCaches() {
++  public function clearAllCaches() {
+     $this->drupalGet('admin/config/development/performance');
+     $this->assertResponse(200);
+     $this->assertText(t('Performance'));
+diff --git a/tests/metatag.node.test b/tests/metatag.node.test
+index 6c3bb18..e940c20 100644
+--- a/tests/metatag.node.test
++++ b/tests/metatag.node.test
+@@ -79,7 +79,6 @@ public function testEntityCreationWorkflow() {
+     $this->assertEqual($this->getUrl(), url('admin/config/search/metatags', array('absolute' => TRUE)));
+ 
+     // Create a test node.
+-
+     // Load the node form.
+     $this->drupalGet('node/add/' . $content_type_path);
+     $this->assertResponse(200);
+@@ -89,9 +88,12 @@ public function testEntityCreationWorkflow() {
+     $this->assertText(strip_tags(t('Create @name', array('@name' => $label))));
+ 
+     // Verify that it's possible to submit values to the form.
++    module_load_include('inc', 'devel_generate');
++    $body = devel_create_para(200);
+     $this->drupalPost(NULL, array(
+       'metatags[und][abstract][value]' => '[node:title] ponies',
+       'title' => 'Who likes magic',
++      'body[und][0][value]' => $body,
+     ), t('Save'));
+     $this->assertResponse(200);
+ 
+@@ -151,6 +153,23 @@ public function testEntityCreationWorkflow() {
+     $this->assertEqual(count($xpath), 1, 'Exactly one abstract meta tag found.');
+     $this->assertEqual($xpath[0]['content'], 'Who likes magic ponies');
+ 
++    // Verify the node summary is being used correctly.
++    $xpath = $this->xpath("//meta[@name='description']");
++    $this->assertEqual(count($xpath), 1);
++    $this->assertEqual($xpath[0]['content'], DrupalDefaultMetaTag::text_summary($body, 380));
++
++    // Verify the maxlength functionality is working correctly.
++    $maxlength = 10;
++    variable_set('metatag_maxlength_description', $maxlength);
++    metatag_config_cache_clear();
++    $this->drupalGet('node/' . $nid);
++    $xpath = $this->xpath("//meta[@name='description']");
++    $this->assertEqual(count($xpath), 1);
++    $this->assertEqual($xpath[0]['content'], trim(substr($xpath[0]['content'], 0, $maxlength)));
++    // Delete the variable so it goes back to the default.
++    variable_del('metatag_maxlength_description');
++    metatag_config_cache_clear();
++
+     // Core's canonical tag is a relative URL, whereas Metatag outputs an
+     // absolute URL.
+     $old_canonical = url('node/' . $node->nid);
