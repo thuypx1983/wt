@@ -24,8 +24,11 @@
 ?>
 <?php
 if($output){
-  if($postion!==FALSE){
+  $position=strrpos($output,'-');
+  if($position!==FALSE){
     $output=substr($output,0,$postion);
   }
 }
-print $output; ?>
+print $output;
+?>
+
