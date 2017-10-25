@@ -49,6 +49,8 @@
 
 .view-search {
   position: relative; }
+  .view-search > .view-content .views-row {
+    margin-bottom: 5px; }
   .view-search > .view-content .row-content {
     padding: 0px;
     border: none;
