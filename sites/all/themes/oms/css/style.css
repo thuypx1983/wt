@@ -49,21 +49,21 @@
 
 .view-search {
   position: relative; }
-  .view-search > .row-content {
+  .view-search > .view-content .row-content {
     padding: 0px;
     border: none;
     border-radius: inherit;
     box-shadow: none; }
-    .view-search > .row-content .views-field-title {
+    .view-search > .view-content .row-content .views-field-title {
       text-align: center; }
-    .view-search > .row-content .views-field-field-image {
+    .view-search > .view-content .row-content .views-field-field-image {
       float: none;
       width: 100%; }
-    .view-search > .row-content .views-field-changed, .view-search > .row-content .views-field-field-author, .view-search > .row-content .views-field-field-rating, .view-search > .row-content .views-field-field-category {
+    .view-search > .view-content .row-content .views-field-changed, .view-search > .view-content .row-content .views-field-field-author, .view-search > .view-content .row-content .views-field-field-rating, .view-search > .view-content .row-content .views-field-field-category {
       display: none; }
-    .view-search > .row-content .story-info {
+    .view-search > .view-content .row-content .story-info {
       position: relative; }
-      .view-search > .row-content .story-info .views-field-totalcount {
+      .view-search > .view-content .row-content .story-info .views-field-totalcount {
         display: inline-block;
         position: absolute;
         bottom: 100%;
@@ -72,7 +72,7 @@
         background-color: rgba(68, 68, 68, 0.6);
         padding: 2px 10px;
         font-size: 13px; }
-    .view-search > .row-content .views-field-field-state {
+    .view-search > .view-content .row-content .views-field-field-state {
       text-align: center;
       font-size: 12px;
       color: #999;
