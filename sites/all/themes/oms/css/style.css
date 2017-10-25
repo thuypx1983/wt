@@ -47,103 +47,46 @@
   color: #999;
   font-size: 12px; }
 
-.view-stories-list {
+.view-search {
   position: relative; }
-  .view-stories-list .view-header {
-    padding-left: 15px;
-    padding-right: 15px;
-    display: block; }
-    .view-stories-list .view-header h1 {
-      margin-bottom: 20px;
-      margin-top: 5px; }
-    .view-stories-list .view-header .category-description {
-      border: none;
-      padding-bottom: 0px;
-      margin-top: 0px;
-      margin-bottom: 15px; }
-      .view-stories-list .view-header .category-description p {
-        margin-top: 0px;
-        color: #9e9e9e;
-        font-style: italic; }
-  .view-stories-list .view-filters {
-    position: absolute;
-    right: 0px;
-    display: inline-block;
-    top: 10px; }
-    .view-stories-list .view-filters label {
-      display: none; }
-  .view-stories-list .views-row .row-content {
-    display: table;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #e5e6e9;
-    border-radius: 3px;
-    box-shadow: 1px 1px 3px #e5e6e9;
-    position: relative; }
-    .view-stories-list .views-row .row-content .views-field-title h3 {
-      font-size: 14px;
-      font-weight: bold;
-      margin: 0px; }
-    .view-stories-list .views-row .row-content .views-field-field-image {
-      float: left;
-      width: 40%;
-      margin-right: 15px; }
-    .view-stories-list .views-row .row-content .views-field-changed,
-    .view-stories-list .views-row .row-content .views-field-field-author,
-    .view-stories-list .views-row .row-content .views-field-field-category,
-    .view-stories-list .views-row .row-content .views-field-totalcount,
-    .view-stories-list .views-row .row-content .views-field-field-state,
-    .view-stories-list .views-row .row-content .views-field-field-current-chapter {
-      font-size: 12px;
-      color: #999;
-      margin-top: 3px; }
-    .view-stories-list .views-row .row-content .views-field-field-rating {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      display: inline-block; }
-      .view-stories-list .views-row .row-content .views-field-field-rating .field-content {
-        position: relative;
-        text-align: center;
-        line-height: 55px;
-        width: 55px;
-        height: 55px;
-        z-index: 2;
-        color: #fff;
-        font-weight: bold; }
-        .view-stories-list .views-row .row-content .views-field-field-rating .field-content:after {
-          position: absolute;
-          font-family: FontAwesome;
-          content: "\f005";
-          width: 55px;
-          height: 55px;
-          left: 0px;
-          top: 0px;
-          font-size: 55px;
-          color: #FFC107;
-          z-index: -1; }
+  .view-search > .view-content .views-row .row-content .views-field-title h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0px; }
+  .view-search > .view-content .views-row .row-content .views-field-field-image {
+    float: left;
+    width: 40%;
+    margin-right: 15px; }
+  .view-search > .view-content .views-row .row-content .views-field-changed,
+  .view-search > .view-content .views-row .row-content .views-field-field-author,
+  .view-search > .view-content .views-row .row-content .views-field-field-category,
+  .view-search > .view-content .views-row .row-content .views-field-totalcount,
+  .view-search > .view-content .views-row .row-content .views-field-field-state,
+  .view-search > .view-content .views-row .row-content .views-field-field-current-chapter {
+    font-size: 12px;
+    color: #999;
+    margin-top: 3px; }
 
 @media only screen and (min-width: 768px) {
-  .view-stories-list .views-row:nth-child(-n+6) .row-content .views-field-field-image {
+  .view-search .views-row:nth-child(-n+6) .row-content .views-field-field-image {
     margin-bottom: 10px; }
-  .view-stories-list .views-row:nth-child(n+7) {
+  .view-search .views-row:nth-child(n+7) {
     width: 25%; }
-    .view-stories-list .views-row:nth-child(n+7) .row-content {
+    .view-search .views-row:nth-child(n+7) .row-content {
       padding: 0px;
       border: none;
       border-radius: inherit;
       box-shadow: none; }
-      .view-stories-list .views-row:nth-child(n+7) .row-content .views-field-title {
+      .view-search .views-row:nth-child(n+7) .row-content .views-field-title {
         text-align: center; }
-      .view-stories-list .views-row:nth-child(n+7) .row-content .views-field-field-image {
+      .view-search .views-row:nth-child(n+7) .row-content .views-field-field-image {
         float: none;
         width: 100%; }
-      .view-stories-list .views-row:nth-child(n+7) .row-content .views-field-changed, .view-stories-list .views-row:nth-child(n+7) .row-content .views-field-field-author, .view-stories-list .views-row:nth-child(n+7) .row-content .views-field-field-rating, .view-stories-list .views-row:nth-child(n+7) .row-content .views-field-field-category {
+      .view-search .views-row:nth-child(n+7) .row-content .views-field-changed, .view-search .views-row:nth-child(n+7) .row-content .views-field-field-author, .view-search .views-row:nth-child(n+7) .row-content .views-field-field-rating, .view-search .views-row:nth-child(n+7) .row-content .views-field-field-category {
         display: none; }
-      .view-stories-list .views-row:nth-child(n+7) .row-content .story-info {
+      .view-search .views-row:nth-child(n+7) .row-content .story-info {
         position: relative; }
-        .view-stories-list .views-row:nth-child(n+7) .row-content .story-info .views-field-totalcount {
+        .view-search .views-row:nth-child(n+7) .row-content .story-info .views-field-totalcount {
           display: inline-block;
           position: absolute;
           bottom: 100%;
@@ -152,7 +95,7 @@
           background-color: rgba(68, 68, 68, 0.6);
           padding: 2px 10px;
           font-size: 13px; }
-      .view-stories-list .views-row:nth-child(n+7) .row-content .views-field-field-state {
+      .view-search .views-row:nth-child(n+7) .row-content .views-field-field-state {
         text-align: center;
         font-size: 12px;
         color: #999;
