@@ -26,7 +26,7 @@
 if($output){
   $position=strrpos($output,'-');
   if($position!==FALSE){
-    $output=substr($output,0,$postion);
+    $output=substr($output,0,$position);
   }
 }
 print $output;
