@@ -67,40 +67,6 @@
     color: #999;
     margin-top: 3px; }
 
-@media only screen and (min-width: 768px) {
-  .view-search .views-row:nth-child(-n+6) .row-content .views-field-field-image {
-    margin-bottom: 10px; }
-  .view-search .views-row:nth-child(n+7) {
-    width: 25%; }
-    .view-search .views-row:nth-child(n+7) .row-content {
-      padding: 0px;
-      border: none;
-      border-radius: inherit;
-      box-shadow: none; }
-      .view-search .views-row:nth-child(n+7) .row-content .views-field-title {
-        text-align: center; }
-      .view-search .views-row:nth-child(n+7) .row-content .views-field-field-image {
-        float: none;
-        width: 100%; }
-      .view-search .views-row:nth-child(n+7) .row-content .views-field-changed, .view-search .views-row:nth-child(n+7) .row-content .views-field-field-author, .view-search .views-row:nth-child(n+7) .row-content .views-field-field-rating, .view-search .views-row:nth-child(n+7) .row-content .views-field-field-category {
-        display: none; }
-      .view-search .views-row:nth-child(n+7) .row-content .story-info {
-        position: relative; }
-        .view-search .views-row:nth-child(n+7) .row-content .story-info .views-field-totalcount {
-          display: inline-block;
-          position: absolute;
-          bottom: 100%;
-          right: 0px;
-          color: #fff;
-          background-color: rgba(68, 68, 68, 0.6);
-          padding: 2px 10px;
-          font-size: 13px; }
-      .view-search .views-row:nth-child(n+7) .row-content .views-field-field-state {
-        text-align: center;
-        font-size: 12px;
-        color: #999;
-        padding: 3px 0;
-        margin: 0; } }
 .field-name-field-views-story .field-label {
   padding: 5px 10px;
   margin-bottom: 15px;
