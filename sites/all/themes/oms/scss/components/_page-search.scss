@@ -1,10 +1,20 @@
 .view-search{
   position: relative;
   .view-header{
-
+    margin-top: 80px;
   }
   .view-filters{
-
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    .form-text{
+      border: 1px solid $color_gray;
+      padding: 5px;
+    }
+    .views-exposed-form .views-exposed-widget .form-submit{
+      margin-top: 0px;
+      padding: 5px 10px;
+    }
   }
   &>.view-content{
     .views-row{

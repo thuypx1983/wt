@@ -49,6 +49,18 @@
 
 .view-search {
   position: relative; }
+  .view-search .view-header {
+    margin-top: 80px; }
+  .view-search .view-filters {
+    position: absolute;
+    top: 0px;
+    left: 0px; }
+    .view-search .view-filters .form-text {
+      border: 1px solid #9e9e9e;
+      padding: 5px; }
+    .view-search .view-filters .views-exposed-form .views-exposed-widget .form-submit {
+      margin-top: 0px;
+      padding: 5px 10px; }
   .view-search > .view-content .views-row {
     margin-bottom: 5px; }
   .view-search > .view-content .row-content {
