@@ -1,20 +1,148 @@
-.page-search{
-  .search-results{
-    padding: 0px;
-    margin: 0px;
-    .title{
-      font-size: 15px;
-      margin-bottom: 5px;
+.view-stories-list{
+  position: relative;
+  .view-header{
+    padding-left: 15px;
+    padding-right: 15px;
+    display: block;
+    h1{
+      margin-bottom: 20px;
+      margin-top: 5px;
     }
-    p{
-      margin-bottom: 5px;
-    };
-
-
+    .category-description{
+      border: none;
+      padding-bottom: 0px;
+      margin-top: 0px;
+      margin-bottom: 15px;
+      p{
+        margin-top: 0px;
+        color: $color_gray;
+        font-style: italic;
+      }
+    }
   }
-  #search-form{
-    input,select{
-      border: 1px solid $color_light_gray;
+  .view-filters{
+    position: absolute;
+    right: 0px;
+    display: inline-block;
+    top: 10px;
+    label{
+      display: none;
+    }
+  }
+  .views-row{
+    .row-content{
+      display: table;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #e5e6e9;
+      border-radius: 3px;
+      box-shadow: 1px 1px 3px #e5e6e9;
+      position: relative;
+      .views-field-title{
+        h3{
+          font-size: 14px;
+          font-weight: bold;
+          margin: 0px;
+        }
+      }
+      .views-field-field-image{
+        float: left;
+        width: 40%;
+        margin-right: 15px;
+      }
+      .views-field-changed,
+      .views-field-field-author,
+      .views-field-field-category,
+      .views-field-totalcount,
+      .views-field-field-state,
+      .views-field-field-current-chapter{
+        font-size: 12px;
+        color: $color_gray_1;
+        margin-top: 3px;
+      }
+      .views-field-field-rating{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        display: inline-block;
+        .field-content{
+          position: relative;
+          text-align: center;
+          line-height: 55px;
+          width: 55px;
+          height: 55px;
+          z-index: 2;
+          color: $color_white;
+          font-weight: bold;
+          &:after{
+            position: absolute;
+            font-family: FontAwesome;
+            content: "\f005";
+            width: 55px;
+            height: 55px;
+            left: 0px;
+            top: 0px;
+            font-size: 55px;
+            color: $color_yellow;
+            z-index: -1;
+          }
+        }
+      }
+    }
+  }
+
+}
+@include bp(min-width,$bp-tablet+1){
+  .view-stories-list{
+    .views-row{
+      &:nth-child(-n+6){
+        .row-content{
+          .views-field-field-image{
+            margin-bottom: 10px;
+          }
+        }
+      }
+      &:nth-child(n+7){
+        width: 25%;
+        .row-content{
+          padding: 0px;
+          border: none;
+          border-radius: inherit;
+          box-shadow: none;
+          .views-field-title{
+            text-align: center;
+          }
+          .views-field-field-image{
+            float: none;
+            width: 100%;
+          }
+          .views-field-changed,.views-field-field-author,.views-field-field-rating,.views-field-field-category{
+            display: none;
+          }
+          .story-info{
+            position: relative;
+            .views-field-totalcount{
+              display: inline-block;
+              position: absolute;
+              bottom: 100%;
+              right: 0px;
+              color: $color_white;
+              background-color: rgba(68, 68, 68, 0.6);
+              padding: 2px 10px;
+              font-size: 13px;
+            }
+          }
+
+          .views-field-field-state{
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            padding: 3px 0;
+            margin: 0;
+          }
+        }
+      }
     }
   }
 }
