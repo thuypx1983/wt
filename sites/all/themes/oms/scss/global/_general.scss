@@ -14,12 +14,12 @@ a{
   outline: none;
 }
 .block {
+  display: block;
   background: #fff;
   border: 1px solid #e1e1e1;
   border-radius: 3px;
   margin-top: 10px;
   padding: 10px;
-  width: 100%;
   span.title {
     display: block;
     border-bottom: 2px solid #2980b9;

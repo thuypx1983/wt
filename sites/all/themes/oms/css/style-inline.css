@@ -1272,12 +1272,12 @@ a {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\0000316}}
 .block {
+  display: block;
   background: #fff;
   border: 1px solid #e1e1e1;
   border-radius: 3px;
   margin-top: 10px;
   padding: 10px;
-  width: 100%;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\0000323}}
 .block span.title {

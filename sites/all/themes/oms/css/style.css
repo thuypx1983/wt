@@ -320,5 +320,53 @@
 .footer {
   background-color: #333;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_footer\.scss}line{font-family:\000033}}
+.footer p {
+  color: #fff;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_footer\.scss}line{font-family:\000036}}
+.footer .social-link {
+  text-align: center;
+  text-align: center;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_footer\.scss}line{font-family:\000039}}
+.footer .social-link a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #9e9e9e;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_footer\.scss}line{font-family:\0000315}}
+.footer .social-link a .fa {
+  font-size: 23px;
+  color: white;
+  line-height: 40px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_footer\.scss}line{font-family:\0000324}}
+footer .block {
+  background: transparent;
+  border: none;
+  border-radius: 0px;
+  margin-top: 0px;
+  padding: 0;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_footer\.scss}line{font-family:\0000330}}
+footer .block span.title {
+  display: block;
+  border-bottom: 2px solid #2980b9;
+  margin-bottom: 10px;
+  color: #2980b9;
+  font-size: 20px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_footer\.scss}line{font-family:\0000338}}
+footer .block span.title:after {
+  font-family: "FontAwesome";
+  content: " \f105";
+  font-size: 20px;
+}
 
 /*# sourceMappingURL=style.css.map */

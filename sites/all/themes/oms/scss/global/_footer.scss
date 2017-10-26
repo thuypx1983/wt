@@ -1,3 +1,46 @@
 .footer{
   background-color: $color_black;
+  p{
+    color: $color_white;
+  }
+  .social-link{
+    text-align: center;
+    text-align: center;
+    a{
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: $color_gray;
+      .fa{
+        font-size: 23px;
+        color: white;
+        line-height: 40px;
+      }
+    }
+  }
+}
+footer{
+  .block {
+    background: transparent;
+    border: none;
+    border-radius: 0px;
+    margin-top: 0px;
+    padding: 0;
+    span.title {
+      display: block;
+      border-bottom: 2px solid #2980b9;
+      margin-bottom: 10px;
+      color: #2980b9;
+      font-size: 20px;
+      font-weight: 300;
+      text-transform: uppercase;
+      &:after{
+        font-family: "FontAwesome";
+        content: " \f105";
+        font-size: 20px;
+      }
+
+    }
+  }
 }
