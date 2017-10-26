@@ -1,7 +1,7 @@
 .view-search{
   position: relative;
   .view-header{
-    margin-top: 80px;
+    margin-top: 65px;
   }
   .view-filters{
     position: absolute;
@@ -64,10 +64,12 @@
 
 .page-tim-kiem{
   .title{
-    margin-top: 0px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding-left: 5px;
     padding-top: 5px;
     display: block;
     background-color: $color_white;
-    border-radius: 3px 0px;
+    border-radius: 3px 3px 0px 0px;
   }
 }

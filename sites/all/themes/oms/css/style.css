@@ -50,7 +50,7 @@
 .view-search {
   position: relative; }
   .view-search .view-header {
-    margin-top: 80px; }
+    margin-top: 65px; }
   .view-search .view-filters {
     position: absolute;
     top: 0px;
@@ -95,11 +95,13 @@
       margin: 0; }
 
 .page-tim-kiem .title {
-  margin-top: 0px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding-left: 5px;
   padding-top: 5px;
   display: block;
   background-color: #fff;
-  border-radius: 3px 0px; }
+  border-radius: 3px 3px 0px 0px; }
 
 .field-name-field-views-story .field-label {
   padding: 5px 10px;
