@@ -132,6 +132,16 @@
 }
 
 @include bp(min-width,$bp-tablet+1){
+  #header{
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+  }
+  #wrap{
+    #main{
+      padding-top: 50px;
+    }
+  }
   .header{
     .header-content{
       .main-menu,.second-menu,.user-menu{
