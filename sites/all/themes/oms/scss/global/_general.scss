@@ -70,10 +70,14 @@ img{
   height: auto;
   display: block;
 }
+select,input[type=submit]{
+  cursor: pointer;
+}
 select,input{
   border-radius: 0px;
   border: none;
   padding: 5px;
+
 }
 
 
