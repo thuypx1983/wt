@@ -369,4 +369,9 @@ footer .block span.title:after {
   font-size: 20px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_footer\.scss}line{font-family:\0000347}}
+.footer-bottom {
+  background-color: #017ecb;
+}
+
 /*# sourceMappingURL=style.css.map */
