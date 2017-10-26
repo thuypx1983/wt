@@ -86,9 +86,14 @@
       display: block;
       background-color: $color_white;
       border-radius: 3px 3px 0px 0px;
+      border-right: 1px solid #e1e1e1;
+      border-left: 1px solid #e1e1e1;
+      border-top: 1px solid #e1e1e1;
     }
   }
   .block-system{
     margin-top: 0px;
+    border-top:none;
+    border-radius: 0px 0px 3px 3px;
   }
 }

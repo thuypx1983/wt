@@ -113,9 +113,14 @@
   padding-top: 5px;
   display: block;
   background-color: #fff;
-  border-radius: 3px 3px 0px 0px; }
+  border-radius: 3px 3px 0px 0px;
+  border-right: 1px solid #e1e1e1;
+  border-left: 1px solid #e1e1e1;
+  border-top: 1px solid #e1e1e1; }
 .page-tim-kiem .block-system {
-  margin-top: 0px; }
+  margin-top: 0px;
+  border-top: none;
+  border-radius: 0px 0px 3px 3px; }
 
 .field-name-field-views-story .field-label {
   padding: 5px 10px;
