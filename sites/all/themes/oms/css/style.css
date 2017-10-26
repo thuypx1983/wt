@@ -192,10 +192,12 @@
       .block-short-story .views-row:nth-child(n) img {
         height: auto;
         width: 100%; } }
-.item-list ul.pager {
-  margin-top: 20px; }
-  .item-list ul.pager li {
-    margin: 2px; }
+.item-list {
+  display: table; }
+  .item-list ul.pager {
+    margin-top: 20px; }
+    .item-list ul.pager li {
+      margin: 2px; }
 
 .footer {
   background-color: #333; }

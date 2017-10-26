@@ -1,6 +1,9 @@
-.item-list ul.pager {
-  margin-top: 20px;
-  li{
-    margin: 2px;
+.item-list {
+  display: table;
+  ul.pager {
+    margin-top: 20px;
+    li{
+      margin: 2px;
+    }
   }
 }
