@@ -89,7 +89,6 @@
             <div class="row">
                 <div class="col-md-8">
                     <section id="post-content" role="main">
-                        <h1 class="title"><?php echo $title?></h1>
                       <?php print render($page['content']); ?>
                     </section>
                     <div class="content-after">
