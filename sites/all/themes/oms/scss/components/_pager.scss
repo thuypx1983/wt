@@ -1,9 +1,11 @@
 .item-list {
   display: table;
+  width: 100%;
   ul.pager {
     margin-top: 20px;
     li{
       margin: 2px;
+      background-color: $color_gainsboro;
     }
   }
 }

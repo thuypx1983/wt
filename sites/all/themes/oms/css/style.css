@@ -193,11 +193,13 @@
         height: auto;
         width: 100%; } }
 .item-list {
-  display: table; }
+  display: table;
+  width: 100%; }
   .item-list ul.pager {
     margin-top: 20px; }
     .item-list ul.pager li {
-      margin: 2px; }
+      margin: 2px;
+      background-color: #f2f2f2; }
 
 .footer {
   background-color: #333; }
