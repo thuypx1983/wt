@@ -94,6 +94,13 @@
       padding: 3px 0;
       margin: 0; }
 
+.page-tim-kiem .title {
+  margin-top: 0px;
+  padding-top: 5px;
+  display: block;
+  background-color: #fff;
+  border-radius: 3px 0px; }
+
 .field-name-field-views-story .field-label {
   padding: 5px 10px;
   margin-bottom: 15px;
