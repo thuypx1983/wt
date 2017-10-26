@@ -1337,15 +1337,14 @@ select, input[type=submit] {
   cursor: pointer;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\0000379}}
-select, input {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\0000380}}
+.view-filters select, .view-filters input {
   border-radius: 0px;
   border: none;
   padding: 5px;
 }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\0000387}}
-select {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\0000388}}
+.view-filters select {
   padding: 3px 10px;
   background: transparent url("/sites/all/themes/oms/images/angle-down.png") no-repeat scroll right center;
   border: none;
@@ -1359,26 +1358,26 @@ select {
   -webkit-appearance: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\00003100}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\00003103}}
 select::-ms-expand {
   display: none !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\00003105}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\00003108}}
 .view .views-exposed-form .views-exposed-widget {
   padding: 5px 5px 0px 0px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\00003107}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\00003110}}
 .view .views-exposed-form .views-exposed-widget .views-submit-button {
   display: none;
 }
 
 @media only screen and (max-width: 767px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\00003120}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\00003123}}
   .views-row .views-field-field-image .field-content {
     text-align: center;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\00003122}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/datas\/websites\/dev\.sutunam\.com\/wt\/sites\/all\/themes\/oms\/scss\/global\/_general\.scss}line{font-family:\00003125}}
   .views-row .views-field-field-image .field-content a {
     display: inline-block;
   }

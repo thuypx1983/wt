@@ -76,27 +76,30 @@ img{
 select,input[type=submit]{
   cursor: pointer;
 }
-select,input{
-  border-radius: 0px;
-  border: none;
-  padding: 5px;
+.view-filters{
+  select,input{
+    border-radius: 0px;
+    border: none;
+    padding: 5px;
 
+
+
+  }
+  select {
+    padding: 3px 10px;
+    background: transparent url('/sites/all/themes/oms/images/angle-down.png') no-repeat scroll right center;
+    border: none;
+    border-radius: 25px;
+    margin-left: 4px;
+    background-color: $color_gray !important;
+    color: $color_white;
+    /*for firefox*/
+    -moz-appearance: none;
+    /*for chrome*/
+    -webkit-appearance:none;
+  }
 }
 
-
-select {
-  padding: 3px 10px;
-  background: transparent url('/sites/all/themes/oms/images/angle-down.png') no-repeat scroll right center;
-  border: none;
-  border-radius: 25px;
-  margin-left: 4px;
-  background-color: $color_gray !important;
-  color: $color_white;
-  /*for firefox*/
-  -moz-appearance: none;
-  /*for chrome*/
-  -webkit-appearance:none;
-}
 select::-ms-expand{
   display: none !important;
 }
