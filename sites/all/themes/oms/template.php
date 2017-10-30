@@ -264,3 +264,22 @@ function oms_FullListChapter($story_id)
     }
     return $results;
 }
+
+
+
+function oms_preprocess_field(&$variables, $hook) {
+  if ($node = menu_get_object()) {
+    if ($node->type == 'story') {
+      if($variables['element']['#field_name'] == 'field_current_chapter') {
+        $output=$variables['items']['0']['#markup'];
+        if($output){
+          $position=strrpos($output,'-');
+          if($position!==FALSE){
+            $output=substr($output,0,$position);
+          }
+        }
+        $variables['items']['0']['#markup'] = $output; //new value;
+      }
+    }
+  }
+}
