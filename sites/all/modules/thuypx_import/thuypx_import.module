@@ -184,27 +184,9 @@ function thuypx_import_chapter() {
 }
 
 
-function thuypx_import_views_query_alter(&$view, &$query) {
-  if ($view->name == 'search' && $view->current_display=='block') {
-    if (isset($view->query->where[1]['conditions'])) {
-      if(isset($_GET['title'])){
-        $keywords=explode(' ',$_GET['title']);
-        if($keywords){
-          $i=0;
-          $conditions =& $view->query->where[1]['conditions'][2]['field']->conditions();
-          foreach($keywords as $keyword){
-            $keyword=trim($keyword);
-            if($keyword){
-              $conditions[$i]=array(
-                'field'=>'title',
-                'value'=>'%'.$keyword.'%',
-                'operator'=>'LIKE',
-              );
-              $i++;
-            }
-          }
-        }
-      }
-    }
+function thuypx_import_search_api_views_query_alter(&$view, &$query) {
+  if ($view->name == 'tim_kiem_author') {
+      $where=&$query->where;
+      $where[1]['conditions'][0][1]=$_GET['title'];
   }
 }
