@@ -1,3 +1,4 @@
+var current_font_size=14;
 (function($) {
     var STNScript = {
         // Equal height function
@@ -76,6 +77,34 @@
                 $('.all-menu').toggleClass('open');
             })
         },
+        fontSize:function (x) {
+            var content=$('.field-name-body');
+            current_font_size=current_font_size+(x);
+            content.css('font-size',current_font_size);
+        }
+        ,
+
+        settingContent:function () {
+            $('.btn-setting').click(function(){
+                $('.setting-container').toggleClass('open');
+            })
+            var content=$('.field-name-body');
+            $('#maunen').change(function(){
+                content.css('background-color','#'+$(this).val());
+            })
+            $('#fontfa').change(function(){
+                content.css('font-family',$(this).val());
+            })
+            $('#fonthe').change(function(){
+                content.css('line-height',$(this).val()+'%');
+            })
+            $('.node-type-chapter .fa-search-plus').click(function () {
+                fontSize(2);
+            })
+            $('.node-type-chapter .fa-search-plus').click(function () {
+                fontSize(2);
+            })
+        }
 
 
     }
@@ -84,6 +113,7 @@
         STNScript.expanderStoryDetail();
         STNScript.createButtonViewChapter();
         STNScript.mobileMenu();
+        STNScript.settingContent();
         $('.block-main-hot-story .view-content').slick({
             dots: false,
             infinite: true,

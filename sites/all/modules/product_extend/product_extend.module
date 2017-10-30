@@ -89,8 +89,16 @@ function product_extend_node_view($node, $view_mode, $langcode) {
         );
         //
         break;
-
       case 'chapter':
+        $node->content['btn_setting'] = array(
+          '#type' => 'item',
+          '#title' => '',
+          '#markup' =>  '<div id="setting-box" class="w3-row w3-hide w3-center w3-animate-opacity w3-show"><div class="setting-content"><ul class="w3-ul w3-col s12 m12 l12"><li class="w3-col s12 m12 l12"><div class="w3-col s7 m7 l7 setting-left">Màu nền:</div><div class="w3-col s5 m5 l5 setting-right"><select id="maunen"> <option value="FFF">-Chọn-</option> <option value="FFF">Mặc định</option> <option value="F4F4F4">Xám nhạt</option> <option value="E9EBEE">Xanh nhạt</option> <option value="E1E4F2">Xanh đậm</option> <option value="F4F4E4">Vàng nhạt</option> <option value="EAE4D3">Màu sepia</option> <option value="FAFAC8">Vàng đậm</option> <option value="EFEFAB">Vàng ố</option> <option value="262626">Màu tối</option> </select></div></li> <li class="w3-col s12 m12 l12"><div class="w3-col s7 m7 l7 setting-left">Font chữ:</div><div class="w3-col s5 m5 l5 setting-right"><select id="fontfa"> <option value="Palatino Linotype">-Chọn-</option> <option value="Palatino Linotype">Mặc định</option> <option value="Bookerly">Bookerly</option> <option value="Segoe UI">Segoe UI</option> <option value="Patrick Hand">Patrick Hand</option> <option value="Times New Roman">Times New Roman</option> <option value="Verdana">Verdana</option> <option value="Tahoma">Tahoma</option> <option value="Arial">Arial</option> </select> </div></li><li class="w3-col s12 m12 l12"><div class="w3-col s7 m7 l7 setting-left">Chiều cao dòng:</div><div class="w3-col s5 m5 l5 setting-right"><select id="fonthe"> <option value="160">-Chọn-</option> <option value="160">Mặc định</option> <option value="100">100%</option> <option value="120">120%</option> <option value="140">140%</option> <option value="180">180%</option> <option value="200">200%</option> </select> </div></li><li class="w3-col s12 m12 l12"><div class="w3-col s7 m7 l7 setting-left">Kích Cỡ Chữ:</div><div class="w3-col s5 m5 l5 setting-right"><a><i class="fa fa-search-plus fa-2x" style="color:#444"></i></a> <a><i class="fa fa-search-minus fa-2x" style="color:#444"></i></a></div></li></ul></div></div>',
+
+          '#prefix' => '<div class="setting-container">',
+          '#suffix' => '</div>',
+        );
+
         $field_story=field_get_items('node',$node,'field_story');
           $output="";
         if($field_story){
@@ -128,6 +136,7 @@ function product_extend_node_view($node, $view_mode, $langcode) {
           if($prev){
               $nextprev_control.='<a title="'.$prev['node_title'].'" href="'.url('node/'.$prev['nid'],array('absolute' => TRUE)).'"><i class="fa fa-arrow-left"></i> Chương trước</a>';
           }
+          $nextprev_control.='<a class="btn-setting" href="javascript: void(0)"><i class="fa fa-gear"></i> Setting</a>';
           $nextprev_bottom_control=$nextprev_control.'<div class="chapters-list">
           <span class="full-chapter-text"><span><i class="fa fa-list"></i> DS Chương</span> '.$chapters_html.' </span></div>';
           ;
@@ -235,6 +244,11 @@ function product_extend_field_extra_fields() {
       'nextprev_control' => array(
         'label' => t('nextprev'),
         'description' => t('nextprev.'),
+        'weight' => 1,
+      ) ,
+      'btn_setting' => array(
+        'label' => t('Button setting'),
+        'description' => t('Button setting.'),
         'weight' => 1,
       ) ,
       'nextprev_bottom_control' => array(

@@ -102,4 +102,15 @@
 
     }
   }
+
+  .nextprev > a.btn-setting{
+    background-color: $color_gray_1;
+
+  }
+  .setting-container{
+    display: none;
+    &.open{
+      display: block;
+    }
+  }
 }
