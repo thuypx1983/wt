@@ -60,7 +60,7 @@
         },
 
         expanderStoryDetail:function(){
-            $('.node-full .field-name-body .field-item').expander({
+            $('.node-type-story .node-full .field-name-body .field-item').expander({
                 slicePoint: 450,
                 expandEffect: 'slideDown',
                 window:5,
