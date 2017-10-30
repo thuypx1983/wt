@@ -1408,6 +1408,9 @@ select::-ms-expand {
           display: inline-block; }
         .node-type-chapter .setting-container .setting-content ul li .setting-left {
           width: 138px; }
+      .node-type-chapter .setting-container .setting-content ul .fa {
+        cursor: pointer;
+        font-size: 1.5em; }
 
 .social-buttons .facebook-button {
   display: inline-block;
