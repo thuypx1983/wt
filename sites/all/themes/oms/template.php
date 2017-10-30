@@ -124,6 +124,8 @@ function oms_preprocess_page(&$vars) {
   else {
     $vars['footer_copyright'] = NULL;
   }
+
+  drupal_add_library('system', 'jquery.cookie');
 }
 
 /**

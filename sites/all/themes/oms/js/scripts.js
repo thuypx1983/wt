@@ -1,6 +1,7 @@
-var current_font_size=14;
 (function($) {
+    var current_font_size=16;
     var STNScript = {
+
         // Equal height function
         // Replace "obj" param with your selector
         equalHeight: function (obj) {
@@ -80,29 +81,53 @@ var current_font_size=14;
         fontSize:function (x) {
             var content=$('.field-name-body');
             current_font_size=current_font_size+(x);
-            content.css('font-size',current_font_size);
+            $.cookie('chapter_font_size', current_font_size, { expires: 7 });
+            content.css('font-size',current_font_size+'px');
         }
         ,
 
         settingContent:function () {
+            var content=$('.field-name-body');
+            //init
+            if($.cookie('chapter_background_color')){
+                $('.group-row').css('background-color','#'+$.cookie('chapter_background_color'));
+                $('#maunen').val($.cookie('chapter_background_color'));
+            }
+            if($.cookie('chapter_font_family')){
+                content.css('font-family',$.cookie('chapter_font_family'));
+                $('#fontfa').val($.cookie('chapter_font_family'));
+            }
+            if($.cookie('chapter_line_height')){
+                content.css('line-height',$.cookie('chapter_line_height')+'%');
+                $('#fonthe').val($.cookie('chapter_line_height'));
+            }
+            if($.cookie('chapter_font_size')){
+                content.css('font-size',$.cookie('chapter_font_size')+'px');
+                current_font_size=$.cookie('chapter_font_size');
+            }
+
             $('.btn-setting').click(function(){
                 $('.setting-container').toggleClass('open');
             })
-            var content=$('.field-name-body');
+
             $('#maunen').change(function(){
-                content.css('background-color','#'+$(this).val());
+                $('.group-row').css('background-color','#'+$(this).val());
+                $.cookie('chapter_background_color', $(this).val(), { expires: 7 });
+
             })
             $('#fontfa').change(function(){
                 content.css('font-family',$(this).val());
+                $.cookie('chapter_font_family', $(this).val(), { expires: 7 });
             })
             $('#fonthe').change(function(){
                 content.css('line-height',$(this).val()+'%');
+                $.cookie('chapter_line_height', $(this).val(), { expires: 7 });
             })
             $('.node-type-chapter .fa-search-plus').click(function () {
-                fontSize(2);
+                STNScript.fontSize(2);
             })
-            $('.node-type-chapter .fa-search-plus').click(function () {
-                fontSize(2);
+            $('.node-type-chapter .fa-search-minus').click(function () {
+                STNScript.fontSize(-2);
             })
         }
 
