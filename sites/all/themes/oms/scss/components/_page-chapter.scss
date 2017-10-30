@@ -112,5 +112,28 @@
     &.open{
       display: block;
     }
+    .setting-content{
+      text-align: center;
+      ul{
+        border: 1px solid $color_gray;
+        padding: 20px;
+        border-radius: 3px;
+        margin: auto;
+        display: inline-block;
+        li{
+          padding-top:5px;
+          padding-bottom: 5px;
+          text-align: left;
+          list-style: none;
+          &>div{
+            display: inline-block;
+          }
+          .setting-left{
+            width: 138px;
+          }
+        }
+      }
+    }
   }
+
 }

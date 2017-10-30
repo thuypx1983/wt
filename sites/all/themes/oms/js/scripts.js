@@ -80,7 +80,7 @@
         },
         fontSize:function (x) {
             var content=$('.field-name-body');
-            current_font_size=current_font_size+(x);
+            current_font_size=parseInt(current_font_size)+(x);
             $.cookie('chapter_font_size', current_font_size, { expires: 7 });
             content.css('font-size',current_font_size+'px');
         }
@@ -92,6 +92,9 @@
             if($.cookie('chapter_background_color')){
                 $('.group-row').css('background-color','#'+$.cookie('chapter_background_color'));
                 $('#maunen').val($.cookie('chapter_background_color'));
+                if($.cookie('chapter_background_color')=='262626'){
+                    $('.group-row').css('color','#fff');
+                }
             }
             if($.cookie('chapter_font_family')){
                 content.css('font-family',$.cookie('chapter_font_family'));
@@ -113,6 +116,11 @@
             $('#maunen').change(function(){
                 $('.group-row').css('background-color','#'+$(this).val());
                 $.cookie('chapter_background_color', $(this).val(), { expires: 7 });
+                if($(this).val()=='262626'){
+                    $('.group-row').css('color','#fff');
+                }else{
+                    $('.group-row').css('color','');
+                }
 
             })
             $('#fontfa').change(function(){
