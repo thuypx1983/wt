@@ -151,7 +151,6 @@
         chapterError:function () {
             $('body').on('click','#webform-client-form-1204772 .form-submit',function(){
                 $(document).find('#edit-submitted-chapter').val(window.location.href);
-                alert($(document).find('#edit-submitted-chapter'));
             })
         }
 
