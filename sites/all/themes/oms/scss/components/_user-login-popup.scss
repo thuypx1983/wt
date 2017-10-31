@@ -23,6 +23,11 @@
   .form-actions{
     margin-bottom: 0px;
   }
+  .form-submit{
+    border: none;
+    padding: 5px 15px;
+    background-color: $color_yellow;
+  }
 }
 #modal-content{
   width: 100% !important;
