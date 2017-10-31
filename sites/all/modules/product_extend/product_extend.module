@@ -38,6 +38,15 @@ function product_extend_node_view($node, $view_mode, $langcode) {
     switch ($node->type) {
       case 'story':
 
+        $node->content['btn_add_favorites'] = array(
+          '#type' => 'item',
+          '#title' => '',
+          '#markup' =>  '<a class="btn-add-favorites" href="javascript:void(0);">Thêm vào danh sách truyện Yêu Thích</a>',
+
+          '#prefix' => '<div class="favorites-button">',
+          '#suffix' => '</div>',
+        );
+
         $block = block_load('views', 'chapter-block');
         $block=_block_get_renderable_array(_block_render_blocks(array($block)));
           $output="";
@@ -211,6 +220,11 @@ function product_extend_field_extra_fields() {
        'totalcount' => array(
         'label' => t('Total count viewed'),
         'description' => t('Total count viewed'),
+        'weight' => 1,
+      ),
+       'btn_add_favorites' => array(
+        'label' => t('btn_add_favorites'),
+        'description' => t('btn_add_favorites'),
         'weight' => 1,
       )
     );
