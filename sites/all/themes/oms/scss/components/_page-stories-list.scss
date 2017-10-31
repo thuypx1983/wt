@@ -48,8 +48,8 @@
           text-overflow: ellipsis;
           display: -webkit-box;
           line-height: 14px;     /* fallback */
-          max-height: 28px;      /* fallback */
-          -webkit-line-clamp: 5; /* number of lines to show */
+          height: 28px;      /* fallback */
+          -webkit-line-clamp: 2; /* number of lines to show */
           -webkit-box-orient: vertical;
         }
       }
