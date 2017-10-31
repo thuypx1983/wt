@@ -137,6 +137,16 @@
             $('.node-type-chapter .fa-search-minus').click(function () {
                 STNScript.fontSize(-2);
             })
+        },
+        
+        addToFavorites:function () {
+            $('.btn-add-favorites').click(function () {
+                if($('#edit-submit--2').length==1){
+                    $('#edit-submit--2').trigger('click');
+                }else{
+                    $('#login-popup').trigger('click');
+                }
+            })
         }
 
 
@@ -147,6 +157,7 @@
         STNScript.createButtonViewChapter();
         STNScript.mobileMenu();
         STNScript.settingContent();
+        STNScript.addToFavorites();
         $('.block-main-hot-story .view-content').slick({
             dots: false,
             infinite: true,

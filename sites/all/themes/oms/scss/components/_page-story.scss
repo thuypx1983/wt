@@ -80,8 +80,14 @@
           background-color: $color_green;
           color: white;
           display: inline-block;
-          margin-left: 15px;
         }
+      }
+      .btn-add-favorites{
+        padding: 5px 15px;
+        background-color: $color_green;
+        color: white;
+        display: inline-block;
+        margin-left: 15px;
       }
     }
   }
