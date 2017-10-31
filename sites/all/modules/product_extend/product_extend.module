@@ -42,7 +42,7 @@ function product_extend_node_view($node, $view_mode, $langcode) {
           '#type' => 'item',
           '#title' => '',
           '#markup' =>  '<a class="btn-add-favorites" href="javascript:void(0);">
-<i class="fa fa-heart"></i> Thêm vào danh sách truyện Yêu Thích</a>',
+                         <i class="fa fa-heart"></i> Thêm vào danh sách truyện Yêu Thích</a>',
 
           '#prefix' => '<div class="favorites-button">',
           '#suffix' => '</div>',
@@ -146,11 +146,12 @@ function product_extend_node_view($node, $view_mode, $langcode) {
           if($prev){
               $nextprev_control.='<a title="'.$prev['node_title'].'" href="'.url('node/'.$prev['nid'],array('absolute' => TRUE)).'"><i class="fa fa-arrow-left"></i> Chương trước</a>';
           }
-          $nextprev_control.='<a class="btn-setting" href="javascript: void(0)"><i class="fa fa-gear"></i> Setting</a>';
           $nextprev_bottom_control=$nextprev_control.'<div class="chapters-list">
-          <span class="full-chapter-text"><span><i class="fa fa-list"></i> DS Chương</span> '.$chapters_html.' </span></div>';
-          ;
-          $nextprev_bottom_control.='<a class="ctools-use-modal ctools-modal-modal-popup-small"  href="/modal_forms/nojs/webform/1204772"><i class="fa fa-warning"></i> Báo lỗi</a>';
+          <span class="full-chapter-text"><span><i class="fa fa-list"></i> DS Chương</span> '.$chapters_html.' </span>
+          </div>';
+        $nextprev_control.='<a class="btn-setting" href="javascript: void(0)"><i class="fa fa-gear"></i> Setting</a>';
+
+        $nextprev_bottom_control.='<a class="ctools-use-modal ctools-modal-modal-popup-small"  href="/modal_forms/nojs/webform/1204772"><i class="fa fa-warning"></i> Báo lỗi</a>';
           if($next){
               $n='<a title="'.$next['node_title'].'" href="'.url('node/'.$next['nid'],array('absolute' => TRUE)).'">Chương sau <i class="fa fa-arrow-right"></i></a>';
               $nextprev_control.=$n;
