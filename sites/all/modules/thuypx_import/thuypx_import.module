@@ -210,7 +210,7 @@ function thuypx_import_form_alter(&$form, $form_state, $form_id) {
       '#title' => '',
       '#markup' =>  '
         <div class="user-password"><a href="/user/password">Quên mật khẩu</a></div>
-        <div class="user-facebook login"><a href="//user/simple-fb-connect"><i class="fa fa-facebook"></i> facebook login</a></div>
+        <div class="user-facebook login"><a href="/user/simple-fb-connect"><i class="fa fa-facebook"></i> facebook login</a></div>
         <div class="user-register">Chưa có tài khoản? <a href="/user/register">Đăng Ký</a></div>
         ',
 
