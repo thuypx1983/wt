@@ -1,0 +1,39 @@
+#user-login.ctools-use-modal-processed{
+  .description{
+    display: none;
+  }
+  .form-text{
+    max-width: 100%;
+  }
+  .user-facebook.login{
+    display: block;
+    text-align: center;
+    a{
+      padding: 5px 15px;
+      background-color: $color_green;
+      color: white;
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+  .form-item{
+    margin-top: 0px;
+  }
+  .form-actions{
+    margin-bottom: 0px;
+  }
+}
+#modal-content{
+  width: 100% !important;
+}
+#modalContent{
+  .modal-header.popups-title{
+    padding: 5px;
+    background-color: $color_green;
+
+    .modal-title{
+      color: $color_white;
+    }
+  }
+}
