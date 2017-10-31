@@ -91,8 +91,14 @@
 .view-tim-kiem .view-tim-kiem-author > .view-content {
   .views-row{
     margin-bottom: 5px;
-    .row-content .views-field-title{
-      text-align: left;
+    .row-content {
+      border: 1px solid $color_gray;
+      border-radius: 3px;
+      padding: 10px;
+      height: 50px;
+      .views-field-title{
+        text-align: left;
+      }
     }
   }
 }
