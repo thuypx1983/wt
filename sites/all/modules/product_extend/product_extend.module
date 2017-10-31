@@ -150,6 +150,7 @@ function product_extend_node_view($node, $view_mode, $langcode) {
           $nextprev_bottom_control=$nextprev_control.'<div class="chapters-list">
           <span class="full-chapter-text"><span><i class="fa fa-list"></i> DS Chương</span> '.$chapters_html.' </span></div>';
           ;
+          $nextprev_bottom_control.='<a class="ctools-use-modal ctools-modal-modal-popup-small"  href="/modal_forms/nojs/webform/1204772"></a>';
           if($next){
               $n='<a title="'.$next['node_title'].'" href="'.url('node/'.$next['nid'],array('absolute' => TRUE)).'">Chương sau <i class="fa fa-arrow-right"></i></a>';
               $nextprev_control.=$n;
