@@ -107,7 +107,10 @@
     <span class="title">Bình luận thành viên</span>
     <div class="comment-content">
       <?php print render($content['links']); ?>
-      <?php print render($content['comments']); ?>
+      <?php
+      hide($content['comments']['comments']['pager']);
+      print render($content['comments']);
+      ?>
     </div>
   </footer>
 <?php if (!$page): ?>
