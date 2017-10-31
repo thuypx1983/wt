@@ -122,7 +122,7 @@ if($field_story){
     $field_category=field_get_items('node',$field_story[0]['entity'],'field_category');
     if($field_category){
         ?>
-        <div class="block related-story">
+        <div class="block related-story block-highlight">
             <span class="title">Truyện cùng thể loại</span>
             <div class="content">
                 <?php
