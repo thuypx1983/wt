@@ -193,7 +193,6 @@ function thuypx_import_search_api_views_query_alter(&$view, &$query) {
 
 function thuypx_import_views_pre_execute(&$view) {
   if ($view->name == 'tim-kiem') {
-    field_category=All&field_state=All
     if(isset($_GET['field_category']) AND isset($_GET['field_state'])){
       if($_GET['field_category']!='All' OR $_GET['field_state']!='All'){
         $header =&$view->header;
