@@ -38,7 +38,7 @@
 
         autoHeight:function(){
             STNScript.equalHeight('.block-highlight .views-row');
-            STNScript.equalHeight('.view-search >.view-content .views-row');
+            STNScript.equalHeight('.view-tim-kiem >.view-content .views-row');
         },
          isMobile:function () {
             var w=$(window).width();
