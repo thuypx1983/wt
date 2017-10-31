@@ -123,7 +123,7 @@ if($field_story){
     if($field_category){
         ?>
         <div class="block related-story">
-            <span class="title">Truyện mới đăng</span>
+            <span class="title">Truyện cùng thể loại</span>
             <div class="content">
                 <?php
                 print views_embed_view('hot','block_7', $field_category[0]['tid']);
