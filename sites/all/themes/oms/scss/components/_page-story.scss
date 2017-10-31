@@ -82,6 +82,10 @@
           display: inline-block;
         }
       }
+      .favorites-button{
+        text-align: center;
+        margin-bottom: 15px;
+      }
       .btn-add-favorites{
         padding: 5px 15px;
         background-color: $color_green;
