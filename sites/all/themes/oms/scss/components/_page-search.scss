@@ -1,4 +1,4 @@
-.view-search{
+.view-tim-kiem{
   position: relative;
   .view-header{
     margin-top: 65px;
@@ -83,12 +83,12 @@
   }
 
   .view-display-id-block{
-    .views-field views-field-title{
+    .views-field .views-field-title{
       text-align: left;
     }
   }
 }
-.view-search.view-display-id-block > .view-content {
+.view-tim-kiem .view-tim-kiem-author > .view-content {
   .views-row{
     margin-bottom: 5px;
     .row-content .views-field-title{
