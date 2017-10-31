@@ -41,7 +41,8 @@ function product_extend_node_view($node, $view_mode, $langcode) {
         $node->content['btn_add_favorites'] = array(
           '#type' => 'item',
           '#title' => '',
-          '#markup' =>  '<a class="btn-add-favorites" href="javascript:void(0);"><i class="fa fa-header"></i> Thêm vào danh sách truyện Yêu Thích</a>',
+          '#markup' =>  '<a class="btn-add-favorites" href="javascript:void(0);">
+<i class="fa fa-heart"></i> Thêm vào danh sách truyện Yêu Thích</a>',
 
           '#prefix' => '<div class="favorites-button">',
           '#suffix' => '</div>',
