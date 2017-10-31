@@ -44,6 +44,13 @@
           font-size: 14px;
           font-weight: bold;
           margin: 0px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          line-height: 14px;     /* fallback */
+          max-height: 28px;      /* fallback */
+          -webkit-line-clamp: 5; /* number of lines to show */
+          -webkit-box-orient: vertical;
         }
       }
       .views-field-field-image{
