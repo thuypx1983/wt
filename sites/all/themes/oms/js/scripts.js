@@ -147,6 +147,11 @@
                     $('#login-popup').trigger('click');
                 }
             })
+        },
+        chapterError:function () {
+            $(document).on('click','#webform-client-form-1204772 .form-submit'),function(){
+                $(document).find('#edit-submitted-chapter').val(window.location.href);
+            }
         }
 
 
@@ -158,6 +163,7 @@
         STNScript.mobileMenu();
         STNScript.settingContent();
         STNScript.addToFavorites();
+        STNScript.chapterError();
         $('.block-main-hot-story .view-content').slick({
             dots: false,
             infinite: true,
