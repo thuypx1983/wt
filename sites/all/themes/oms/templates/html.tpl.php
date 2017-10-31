@@ -50,6 +50,6 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="/sites/all/themes/oms/js/pushy/js/pushy.js" async defer></script>
 
-
+  <a class="ctools-use-modal ctools-modal-modal-popup-small" href="modal_forms/nojs/login">Login</a>
 </body>
 </html>
