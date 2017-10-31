@@ -87,6 +87,8 @@
         ,
 
         settingContent:function () {
+            if($('body.node-type-chapter').length!=1) return;
+
             var content=$('.field-name-body');
             //init
             if($.cookie('chapter_background_color')){
