@@ -20,9 +20,49 @@ function thuypx_import_menu() {
         'page callback' => 'thuypx_import_clean_chapter',
         'access arguments' => array('access content'),
     );
+
+  $items['thuypx_import/story-update-status'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'thuypx_import_story_update_status',
+    'access arguments' => array('access content'),
+  );
     return $items;
 }
+function thuypx_import_story_update_status(){
+  require_once DRUPAL_ROOT.'/tools/simplehtmldom_1_5/simple_html_dom.php';
+  require_once DRUPAL_ROOT.'/tools/libs/helper.php';
 
+  $file=DRUPAL_ROOT.'/story1_nid.txt';
+  $nid=(int)file_get_contents($file);
+  $q="SELECT * FROM `crawl_story` WHERE `nid`>{$nid} ORDER BY `nid` ASC LIMIT 1";
+  $row=db_query($q)->fetchAssoc();
+  if(!$row){
+    echo "done";
+    exit();
+  }
+  $helper=new helper();
+  $html_str =$helper->curl_download($row['url_source']);
+  $html = new simple_html_dom();
+  $html->load($html_str);
+  $nid=$row['nid'];
+  $node=node_load($nid);
+
+
+  $status=trim(strip_tags($html->find('.detail-info ul',0)->find('li', 3)->plaintext));
+  if($status=='Đang cập nhật'){
+    $node_wrapper = entity_metadata_wrapper('node', $node);
+    $node_wrapper->field_state->set(1);
+  }else{
+    $node_wrapper = entity_metadata_wrapper('node', $node);
+    $node_wrapper->field_state->set(2);
+  }
+  $node_wrapper->save();
+
+  echo url('node/'.$nid,array('absolute'=>true));
+  echo '<br/>';
+  echo $status;
+  file_put_contents($file,$nid);
+}
 function thuypx_import_clean_chapter(){
     $file=DRUPAL_ROOT.'/story_nid.txt';
     $nid=(int)file_get_contents($file);
