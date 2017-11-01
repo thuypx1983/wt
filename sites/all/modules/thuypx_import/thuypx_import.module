@@ -45,6 +45,8 @@ function thuypx_import_story_update_status(){
   $html = new simple_html_dom();
   $html->load($html_str);
   $nid=$row['nid'];
+
+    file_put_contents($file,$nid);
   $node=node_load($nid);
 
 
@@ -61,7 +63,6 @@ function thuypx_import_story_update_status(){
   echo url('node/'.$nid,array('absolute'=>true));
   echo '<br/>';
   echo $status;
-  file_put_contents($file,$nid);
 }
 function thuypx_import_clean_chapter(){
     $file=DRUPAL_ROOT.'/story_nid.txt';
