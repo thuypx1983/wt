@@ -15,8 +15,53 @@ function thuypx_import_menu() {
         'page callback' => 'thuypx_import_chapter',
         'access arguments' => array('access content'),
     );
+    $items['thuypx_import/clean-chapter'] = array(
+        'type' => MENU_CALLBACK,
+        'page callback' => 'thuypx_import_clean_chapter',
+        'access arguments' => array('access content'),
+    );
     return $items;
 }
+
+function thuypx_import_clean_chapter(){
+    $file=DRUPAL_ROOT.'/story_nid.txt';
+    $nid=(int)file_get_contents($file);
+    $q="SELECT `nid` FROM `node` WHERE `nid`>{$nid} AND type='story' ORDER BY `nid` ASC LIMIT 1";
+    $nid=db_query($q)->fetchField();
+    if(!$nid){
+        echo "done";
+        exit();
+    }
+
+
+    $q="SELECT node.title , node.nid AS nid
+        FROM 
+        `node` node
+        LEFT JOIN `field_data_field_story` field_data_field_story ON node.nid = field_data_field_story.entity_id AND (field_data_field_story.entity_type = 'node' AND field_data_field_story.deleted = '0')
+        WHERE (( (node.status = '1') AND (node.type IN  ('chapter')) AND (field_data_field_story.field_story_target_id = '{$nid}') ))
+        ";
+        $chapters=db_query($q);
+        $data=array();
+        while ($chapter=$chapters->fetch()){
+            if(!isset($data[$chapter->title])) $data[$chapter->title]=array();
+            $data[$chapter->title][]=$chapter->nid;
+        }
+        $deleted=0;
+        foreach($data as $items){
+            if(count($items)>1){
+                array_shift($items);
+                $deleted+=count($items);
+                node_delete_multiple($items);
+            }
+        }
+        echo url('node/'.$nid,array('absolute'=>true));
+        echo '<br/>';
+        echo 'Clear: '.$deleted;
+        echo '<br/>';
+        print_r($data);
+        file_put_contents($file,$nid);
+    }
+
 
 function thuypx_import_story() {
     $databases=array (
@@ -182,7 +227,6 @@ function thuypx_import_chapter() {
     exit();
 
 }
-
 
 function thuypx_import_search_api_views_query_alter(&$view, &$query) {
   if ($view->name == 'tim_kiem_author') {
