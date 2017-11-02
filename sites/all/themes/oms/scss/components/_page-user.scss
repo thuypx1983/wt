@@ -1,0 +1,35 @@
+.page-user{
+  .form-text{
+    max-width: 100%;
+  }
+  .extend-login-form{
+    margin-top: 20px;
+    a{
+      color: $color_link;
+    }
+    .user-facebook.login{
+      display: block;
+      text-align: left;
+      a{
+        padding: 5px 15px;
+        background-color: $color_green;
+        color: white;
+        display: inline-block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .form-item{
+    margin-top: 0px;
+  }
+  .form-actions{
+    margin-bottom: 0px;
+  }
+  .form-submit{
+    border: none;
+    padding: 5px 15px;
+    background-color: $color_yellow;
+  }
+}
