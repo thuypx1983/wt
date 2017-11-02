@@ -327,17 +327,11 @@ function thuypx_import_views_pre_execute(&$view) {
 
 function thuypx_import_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'user_login_block' || $form_id == 'user_login') {
-    $form['extend_login']=array(
-      '#type' => 'item',
-      '#title' => '',
-      '#markup' =>  '
+
+      $form['actions']['submit']['#suffix']= '<div class="extend-login-form">'. '
         <div class="user-password"><a href="/user/password">Quên mật khẩu</a></div>
         <div class="user-facebook login"><a href="/user/simple-fb-connect"><i class="fa fa-facebook"></i> facebook login</a></div>
         <div class="user-register">Chưa có tài khoản? <a href="/user/register">Đăng Ký</a></div>
-        ',
-
-      '#prefix' => '<div class="extend-login-form">',
-      '#suffix' => '</div>',
-    );
+        '.'</div>';
   }
 }
