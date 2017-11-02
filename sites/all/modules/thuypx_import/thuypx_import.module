@@ -106,6 +106,7 @@ function thuypx_import_clean_weight_chapter(){
 
     echo '<br/>';
     echo $chapter->title.':'.$weight.'<br>';
+    die();
     echo '<br/>';
   }
   echo url('node/'.$nid,array('absolute'=>true));
