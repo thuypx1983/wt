@@ -73,7 +73,7 @@ function thuypx_import_story_update_status(){
 
 
 function thuypx_import_clean_weight_chapter(){
-  $file=DRUPAL_ROOT.'/story_nid.txt';
+  $file=DRUPAL_ROOT.'/chapter_nid.txt';
   $nid=(int)file_get_contents($file);
   $q="SELECT `nid` FROM `node` WHERE `nid`>{$nid} AND type='chapter' ORDER BY `nid` ASC LIMIT 1";
   $nid=db_query($q)->fetchField();
@@ -95,8 +95,8 @@ function thuypx_import_clean_weight_chapter(){
 
   echo '<br/>';
   echo $node_chapter->title.':'.$weight.'<br>';
-  die();
   echo '<br/>';
+  file_put_contents($file,$nid);
 }
 
 function thuypx_import_clean_chapter(){
