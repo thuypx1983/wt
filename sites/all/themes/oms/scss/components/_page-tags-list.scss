@@ -103,13 +103,6 @@
 @include bp(min-width,$bp-tablet+1){
   .view-tags {
     .views-row{
-      &:nth-child(-n+6){
-        .row-content{
-          .views-field-field-image{
-            margin-bottom: 10px;
-          }
-        }
-      }
       &:nth-child(n+0){
         width: 25%;
         .row-content{
