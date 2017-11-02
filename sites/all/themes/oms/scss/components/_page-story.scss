@@ -140,6 +140,9 @@
       margin-right: 10px;
       a{
         color: $color_green;
+        &:after{
+          content: ",";
+        }
       }
     }
   }
