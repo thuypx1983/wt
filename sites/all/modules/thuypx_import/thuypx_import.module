@@ -100,15 +100,17 @@ function thuypx_import_clean_weight_chapter(){
     {
       $weight=(int)$matches[0];
     }
-    echo $weight;die();
 
     $node_wrapper->field_weight->set($weight);
+    $node_wrapper->save();
 
+    echo '<br/>';
+    echo $chapter->title.':'.$weight.'<br>';
+    echo '<br/>';
   }
   echo url('node/'.$nid,array('absolute'=>true));
-  echo '<br/>';
-  print_r($data);
-  file_put_contents($file,$nid);
+
+  //file_put_contents($file,$nid);
 }
 
 function thuypx_import_clean_chapter(){
