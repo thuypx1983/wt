@@ -67,7 +67,9 @@
         font-size: 12px;
         color: $color_gray_1;
         margin-top: 3px;
+
       }
+
       .views-field-field-rating{
         position: absolute;
         bottom: 10px;
@@ -138,6 +140,12 @@
               background-color: rgba(68, 68, 68, 0.6);
               padding: 2px 10px;
               font-size: 13px;
+            }
+
+            .views-field-field-current-chapter .field-content{
+              display: block;
+              height: 1em;
+              text-align: center;
             }
           }
 
