@@ -3,6 +3,6 @@
 
 while true
 do
- curl http://truyenthegioi.com/thuypx_import/chapter
+ curl http://truyenthegioi.com:8080/thuypx_import/chapter
  sleep 1
 done
