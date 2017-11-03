@@ -44,8 +44,16 @@
       }
     }
     .field-name-field-category{
-      a{
+      .field-items{
         @include iconFontAwesome('\f02c');
+        .field-item{
+          display: inline-block;
+          a{
+            &:after{
+              content: ", ";
+            }
+          }
+        }
       }
     }
     .field-name-field-state{
