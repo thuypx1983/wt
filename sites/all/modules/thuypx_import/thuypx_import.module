@@ -73,9 +73,9 @@ function thuypx_import_story_update_status(){
 
 
 function thuypx_import_clean_weight_chapter(){
-  $file=DRUPAL_ROOT.'/chapter_nid.txt';
+  $file=DRUPAL_ROOT.'/story_nid.txt';
   $nid=(int)file_get_contents($file);
-  $q="SELECT `nid` FROM `node` WHERE `nid`>{$nid} AND type='chapter' ORDER BY `nid` ASC LIMIT 1";
+  $q="SELECT `nid` FROM `node` WHERE `nid`>{$nid} AND type='story' ORDER BY `nid` ASC LIMIT 1";
   $nid=db_query($q)->fetchField();
   if(!$nid){
     echo "done";
@@ -83,22 +83,20 @@ function thuypx_import_clean_weight_chapter(){
   }
 
   file_put_contents($file,$nid);
+  $sql="SELECT DISTINCT node.nid AS nid, node.title AS node_title, history.timestamp AS history_timestamp, node.created AS node_created, node.changed AS node_changed, node.type AS node_type, node.status AS node_status
+    FROM 
+    node node
+    LEFT JOIN field_data_field_story field_data_field_story ON node.nid = field_data_field_story.entity_id AND (field_data_field_story.entity_type = 'node' AND field_data_field_story.deleted = '0')
+    LEFT JOIN history history ON node.nid = history.nid AND history.uid = '1'
+    WHERE (( (field_data_field_story.field_story_target_id = '8247' ) )AND(( (node.type IN  ('chapter')) )))
+    ORDER BY node_changed DESC
+    LIMIT 50 OFFSET 0";
+    $count_chapter=db_query($sql)->rowCount();
+    if($count_chapter<1){
+      db_query("UPDATE crawl_story SET status=2 WHERE nid={$nid}");
+    }
+    echo "story id: {$nid}, chapters: {$count_chapter}";
 
-  $node_chapter=node_load($nid);
-  $node_wrapper = entity_metadata_wrapper('node', $node_chapter);
-
-  $weight=0;
-  if(preg_match('/\d+/',$node_chapter->title,$matches))
-  {
-    $weight=(int)$matches[0];
-  }
-
-  $node_wrapper->field_weight->set($weight);
-  $node_wrapper->save();
-
-  echo '<br/>';
-  echo $node_chapter->title.':'.$weight.'<br>';
-  echo '<br/>';
 }
 
 function thuypx_import_clean_chapter(){
