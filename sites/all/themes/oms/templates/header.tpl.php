@@ -51,7 +51,7 @@
                       ?>
                     </div>
                     <div class="user-menu">
-                        <a href="#" rel="nofollow"><i class="fa fa-user"></i> Thành Viên</a>
+                        <a href="#" rel="nofollow"><i class="fa fa-user"></i> <?php global $user; echo $user->name?$user->name:'Thành Viên'?></a>
                         <nav id="navigation-user-menu" class="" >
                           <?php
                           if (module_exists('i18n_menu')) {
