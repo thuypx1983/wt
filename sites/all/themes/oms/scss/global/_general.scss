@@ -114,7 +114,9 @@ select::-ms-expand{
   }
 
 }
-
+.container-inline div, .container-inline label {
+  display: inline;
+}
 
 @include bp(max-width,$bp-tablet){
 
