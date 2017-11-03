@@ -67,6 +67,9 @@
         font-size: 12px;
         color: $color_gray_1;
         margin-top: 3px;
+        .field-content{
+          line-height: 1em;
+        }
       }
       .views-field-field-rating{
         position: absolute;
