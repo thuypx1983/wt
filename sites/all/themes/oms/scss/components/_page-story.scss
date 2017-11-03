@@ -56,6 +56,11 @@
         }
       }
     }
+    .field-name-field-source{
+      .field-item{
+        @include iconFontAwesome("\f0ed");
+      }
+    }
     .field-name-field-state{
       .field-item{
         @include iconFontAwesome('\f1eb');
