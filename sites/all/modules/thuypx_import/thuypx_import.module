@@ -88,7 +88,7 @@ function thuypx_import_clean_weight_chapter(){
     node node
     LEFT JOIN field_data_field_story field_data_field_story ON node.nid = field_data_field_story.entity_id AND (field_data_field_story.entity_type = 'node' AND field_data_field_story.deleted = '0')
     LEFT JOIN history history ON node.nid = history.nid AND history.uid = '1'
-    WHERE (( (field_data_field_story.field_story_target_id = '8247' ) )AND(( (node.type IN  ('chapter')) )))
+    WHERE (( (field_data_field_story.field_story_target_id = '{$nid}' ) )AND(( (node.type IN  ('chapter')) )))
     ORDER BY node_changed DESC
     LIMIT 50 OFFSET 0";
     $count_chapter=db_query($sql)->rowCount();
