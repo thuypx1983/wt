@@ -38,6 +38,7 @@ foreach($html->find('#divtab',0)->find('.w3-ul li a') as $a){
         'title'=>$title,
         'weight'=>$weight,
         'story_id'=>$story['id'],
+        'story_nid'=>$story['story_nid'],
         'domain'=>$domain,
       );
     }
@@ -69,6 +70,7 @@ if($last_page){
               'title'=>$title,
               'weight'=>$weight,
               'story_id'=>$story['id'],
+              'story_nid'=>$story['story_nid'],
               'domain'=>$domain,
             );
           }
