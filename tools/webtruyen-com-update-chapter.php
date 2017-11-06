@@ -27,7 +27,8 @@ $weight=1;
 foreach($html->find('#divtab',0)->find('.w3-ul li a') as $a){
     $title=strip_tags($a->innertext);
     preg_match_all('!(\d+)!', $title, $matches);
-    $weight=(int)(implode('',$matches[1]));
+    //$weight=(int)(implode('',$matches[1]));
+    $weight=$matches[1][0];
 
     $db->where('url_source',$a->href);
     $row=$db->getOne('crawl_story_chapter');
@@ -57,7 +58,8 @@ if($last_page){
         foreach($html1->find('#divtab',0)->find('.w3-ul li a') as $a){
             $title=strip_tags($a->innertext);
             preg_match_all('!(\d+)!', $title, $matches);
-            $weight=(int)(implode('',$matches[1]));
+            //$weight=(int)(implode('',$matches[1]));
+            $weight=$matches[1][0];
 
           $db->where('url_source',$a->href);
           $row=$db->getOne('crawl_story_chapter');
