@@ -31,8 +31,7 @@ foreach($html->find('#divtab',0)->find('.w3-ul li a') as $a){
 
     $db->where('url_source',$a->href);
     $row=$db->getOne('crawl_story_chapter');
-    if($row){
-
+    if(!$row){
       $chapters[]=array(
         'url_source'=>$a->href,
         'title'=>$title,
@@ -62,7 +61,7 @@ if($last_page){
 
           $db->where('url_source',$a->href);
           $row=$db->getOne('crawl_story_chapter');
-          if($row) {
+          if(!$row) {
             $chapters[]=array(
               'url_source'=>$a->href,
               'title'=>$title,
