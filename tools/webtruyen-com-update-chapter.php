@@ -76,8 +76,7 @@ if($last_page){
     };
 }
 if(count($chapters)){
-    print_r($chapters);
-    //$db->insertMulti('crawl_story_chapter', $chapters);
+    $db->insertMulti('crawl_story_chapter', $chapters);
 }
 echo "done";
 
