@@ -17,6 +17,9 @@ foreach($html->find('.list-content .list-caption a') as $a)
   $row=$db->getOne('crawl_story');
   if($row){
     echo "Exist record".PHP_EOL;
+    $db->where ('id',$row['id']);
+    $db->update('crawl_story',array('status'=>2));
+
   }else{
       $title=$helper->cleanTitle($a->plaintext);
       $title_code=$helper->encodeTitle($a->plaintext);
@@ -34,6 +37,7 @@ foreach($html->find('.list-content .list-caption a') as $a)
         }
       $db->insert('crawl_story',$data);
   }
+  print_r($data);
 }
 echo 'done';
 
