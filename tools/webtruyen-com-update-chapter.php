@@ -11,7 +11,7 @@ if(!$story){
   echo "completed";
   exit();
 }
-
+print_r($story);die();
 $html_str =$helper->curl_download($story['url_source']);
 $html = new simple_html_dom();
 $html->load($html_str);
