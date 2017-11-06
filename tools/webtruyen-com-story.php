@@ -8,7 +8,7 @@ $db = MysqliDb::getInstance();
 $db->where('status',0);
 $story=$db->getOne('crawl_story');
 if(!$story){
-  echo "Empty";
+  echo "completed";
 }
 $html_str =$helper->curl_download($story['url_source']);
 $html = new simple_html_dom();
