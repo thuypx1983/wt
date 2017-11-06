@@ -21,6 +21,7 @@ $db->where ('id',$story['id']);
 $db->update('crawl_story',array('status'=>1));
 
 $chapters=array();
+$old_chapters=array();
 $weight=1;
 
 //get list chapter in first page
@@ -34,6 +35,15 @@ foreach($html->find('#divtab',0)->find('.w3-ul li a') as $a){
     $row=$db->getOne('crawl_story_chapter');
     if(!$row){
       $chapters[]=array(
+        'url_source'=>$a->href,
+        'title'=>$title,
+        'weight'=>$weight,
+        'story_id'=>$story['id'],
+        'story_nid'=>$story['story_nid'],
+        'domain'=>$domain,
+      );
+    }else{
+      $old_chapters=array(
         'url_source'=>$a->href,
         'title'=>$title,
         'weight'=>$weight,
@@ -73,6 +83,15 @@ if($last_page){
               'story_nid'=>$story['story_nid'],
               'domain'=>$domain,
             );
+          }else{
+            $old_chapters=array(
+              'url_source'=>$a->href,
+              'title'=>$title,
+              'weight'=>$weight,
+              'story_id'=>$story['id'],
+              'story_nid'=>$story['story_nid'],
+              'domain'=>$domain,
+            );
           }
         }
     };
@@ -80,5 +99,7 @@ if($last_page){
 if(count($chapters)){
     $db->insertMulti('crawl_story_chapter', $chapters);
 }
+echo 'old_chapter:';
+print_r($old_chapters);
 echo "done";
 
