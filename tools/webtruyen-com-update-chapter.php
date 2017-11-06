@@ -12,6 +12,11 @@ if(!$story){
   exit();
 }
 
+$html_str =$helper->curl_download($story['url_source']);
+$html = new simple_html_dom();
+$html->load($html_str);
+$data=array();
+
 $db->where ('id',$story['id']);
 $db->update('crawl_story',array('status'=>1));
 
@@ -21,16 +26,15 @@ $weight=1;
 //get list chapter in first page
 foreach($html->find('#divtab',0)->find('.w3-ul li a') as $a){
     $title=strip_tags($a->innertext);
-    $url_source=$a->href;
     preg_match_all('!(\d+)!', $title, $matches);
     $weight=(int)(implode('',$matches[1]));
 
-    $db->where('url_source',$url_source);
+    $db->where('url_source',$a->href);
     $row=$db->getOne('crawl_story_chapter');
     if($row){
 
       $chapters[]=array(
-        'url_source'=>$url_source,
+        'url_source'=>$a->href,
         'title'=>$title,
         'weight'=>$weight,
         'story_id'=>$story['id'],
@@ -56,7 +60,7 @@ if($last_page){
             preg_match_all('!(\d+)!', $title, $matches);
             $weight=(int)(implode('',$matches[1]));
 
-          $db->where('url_source',$url_source);
+          $db->where('url_source',$a->href);
           $row=$db->getOne('crawl_story_chapter');
           if($row) {
             $chapters[]=array(
