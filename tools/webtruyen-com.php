@@ -34,7 +34,6 @@ foreach($html->find('.list-content .list-caption a') as $a)
         }
       $db->insert('crawl_story',$data);
   }
-  print_r($data);
 }
 echo 'done';
 

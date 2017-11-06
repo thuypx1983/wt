@@ -21,6 +21,12 @@ $data['image']=$html->find('.detail-thumbnail img',0)->src;
 $data['detail']=strip_tags($html->find('.summary',0)->innertext);
 $data['author']=strip_tags($html->find('.detail-info li',0)->innertext);
 $data['status']=1;
+$status=trim(strip_tags($html->find('.detail-info ul',0)->find('li', 3)->plaintext));
+if($status=='Đang cập nhật'){
+  $data['state']=1;
+}else{
+  $data['state']=2;
+}
 $db->where ('id',$story['id']);
 $db->update('crawl_story',$data);
 
