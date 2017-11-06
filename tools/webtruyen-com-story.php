@@ -9,6 +9,7 @@ $db->where('status',0);
 $story=$db->getOne('crawl_story');
 if(!$story){
   echo "completed";
+  exit();
 }
 $html_str =$helper->curl_download($story['url_source']);
 $html = new simple_html_dom();

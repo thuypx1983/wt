@@ -13,6 +13,7 @@ $html->load($html_str);
 $db = MysqliDb::getInstance();
 foreach($html->find('.list-content .list-caption a') as $a)
 {
+  $data=array();
   $db->where('url_source',$a->href);
   $row=$db->getOne('crawl_story');
   if($row){
@@ -37,7 +38,6 @@ foreach($html->find('.list-content .list-caption a') as $a)
         }
       $db->insert('crawl_story',$data);
   }
-  print_r($data);
 }
 echo 'done';
 
