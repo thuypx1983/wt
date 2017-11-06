@@ -11,13 +11,14 @@ if(!$story){
   echo "completed";
   exit();
 }
+print_r($story);
 $html_str =$helper->curl_download($story['url_source']);
 $html = new simple_html_dom();
 $html->load($html_str);
 $data=array();
 
-/*$db->where ('id',$story['id']);
-$db->update('crawl_story',array('status'=>1));*/
+$db->where ('id',$story['id']);
+$db->update('crawl_story',array('status'=>1));
 
 $chapters=array();
 $old_chapters=array();
