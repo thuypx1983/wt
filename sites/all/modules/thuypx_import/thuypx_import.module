@@ -167,7 +167,7 @@ function thuypx_import_story() {
     $story=$db->getOne('crawl_story');
         
     if(!$story){
-        echo "complete";
+        echo "completed";
         return;
         exit();
     }     
