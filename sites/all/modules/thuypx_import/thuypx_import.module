@@ -4,6 +4,15 @@ define('IMPORTED_NONE',0);
 define('IMPORTED_STORY',1);
 define('IMPORTED_STORY_CHAPTER',2);
 
+/**
+ * Implements hook_init().
+ */
+function thuypx_import_init() {
+  if (current_path() == 'thuypx_import/story' || current_path() == 'thuypx_import/chapter') {
+    drupal_page_is_cacheable(FALSE);
+  }
+}
+
 function thuypx_import_menu() {
     $items['thuypx_import/story'] = array(
         'type' => MENU_CALLBACK,
