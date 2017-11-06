@@ -260,7 +260,7 @@ function thuypx_import_chapter() {
     }
     $chapter=$db->getOne('crawl_story_chapter');
     if(!$chapter){
-        echo "complete";
+        echo "completed";
         return;
         exit();
     }
