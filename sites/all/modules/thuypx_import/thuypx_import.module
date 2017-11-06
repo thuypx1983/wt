@@ -259,7 +259,7 @@ function thuypx_import_chapter() {
       $db->where('id',$start_id,'>');
     }
     $chapter=$db->getOne('crawl_story_chapter');
-    
+    print_r($chapter);die();
     if(!$chapter){
         echo "complete";
         return;
