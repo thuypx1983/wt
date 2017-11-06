@@ -3,21 +3,9 @@
 include 'config.php';
 $helper=new helper();
 $domain='webtruyen.com';
-$config=$helper->getConfig($domain);
 
-if($config['current_page']<0){
-  echo "Don't find new page";
-  die();
-}
-if($config['current_page']==0){
-  $config['current_page']=$config['total_page'];
-}else{
-  $config['current_page']=$config['current_page']-1;
-}
 
-$url=$config['url'].$config['current_page'].'/';
-
-$helper->saveConfig($domain,$config);
+$url='http://webtruyen.com/all/';
 
 $html_str =$helper->curl_download($url);
 $html = new simple_html_dom();
@@ -46,6 +34,7 @@ foreach($html->find('.list-content .list-caption a') as $a)
         }
       $db->insert('crawl_story',$data);
   }
+  print_r($data);
 }
 echo 'done';
 
