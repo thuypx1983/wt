@@ -43,7 +43,7 @@ foreach($html->find('#divtab',0)->find('.w3-ul li a') as $a){
         'domain'=>$domain,
       );
     }else{
-      $old_chapters=array(
+      $old_chapters[]=array(
         'url_source'=>$a->href,
         'title'=>$title,
         'weight'=>$weight,
@@ -84,7 +84,7 @@ if($last_page){
               'domain'=>$domain,
             );
           }else{
-            $old_chapters=array(
+            $old_chapters[]=array(
               'url_source'=>$a->href,
               'title'=>$title,
               'weight'=>$weight,
