@@ -101,6 +101,9 @@ if(count($chapters)){
     $db->insertMulti('crawl_story_chapter', $chapters);
 }
 echo 'old_chapter:';
+
+print_r($chapters);
+echo 'new_chapter:';
 print_r($old_chapters);
 echo "done";
 
