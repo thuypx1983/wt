@@ -56,6 +56,7 @@ $html->clear();
 $html->load($html_str);
 $max_page=0;
 $last_page= $html->find('.w3-pagination a',-1);
+echo $last_page;die();
 if($last_page){
     $last_href=$last_page->href;
     $max_page=(int)basename($last_href);
