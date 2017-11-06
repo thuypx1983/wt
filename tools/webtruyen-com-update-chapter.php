@@ -56,10 +56,11 @@ $html->clear();
 $html->load($html_str);
 $max_page=0;
 $last_page= $html->find('.w3-pagination a',-1);
-echo $last_page;die();
 if($last_page){
     $last_href=$last_page->href;
     $max_page=(int)basename($last_href);
+
+  echo $max_page;die();
     for($i=2;$i<=$max_page;$i++){
         $url= $story['url_source'].$i.'/';
         $html1 = new simple_html_dom();
