@@ -650,3 +650,5 @@ $conf['advagg_skip_far_future_check'] = TRUE;
 
 $conf['reverse_proxy'] = TRUE;
 $conf['reverse_proxy_addresses'] = array('127.0.0.1','localhost');
+
+$conf['cache_backends'][] = 'sites/all/modules/varnish/varnish.cache.inc';
