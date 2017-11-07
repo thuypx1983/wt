@@ -249,9 +249,9 @@ $databases = array (
   array (
     'default' => 
     array (
-      'database' => 'wt',
-      'username' => 'root',
-      'password' => 'root',
+      'database' => 'truyenthegioi_com',
+      'username' => 'truyenthegioi_co',
+      'password' => 'Sta9D3#23tM9aj',
       'host' => 'localhost',
       'port' => '',
       'driver' => 'mysql',
@@ -583,7 +583,7 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  * not via proxy.
  */
 # $conf['proxy_server'] = '';
-# $conf['proxy_port'] = 8080;
+$conf['proxy_port'] = 8080;
 # $conf['proxy_username'] = '';
 # $conf['proxy_password'] = '';
 # $conf['proxy_user_agent'] = '';
@@ -642,3 +642,11 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  * @see drupal_clean_css_identifier()
  */
 # $conf['allow_css_double_underscores'] = TRUE;
+$conf['cron_safe_threshold'] = 0;
+$conf['advagg_skip_far_future_check'] = TRUE;
+
+
+#revers proxy 
+
+$conf['reverse_proxy'] = TRUE;
+$conf['reverse_proxy_addresses'] = array('127.0.0.1','localhost');
