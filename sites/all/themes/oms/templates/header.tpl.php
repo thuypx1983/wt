@@ -10,7 +10,7 @@
                       <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
 
                   </a>
-                  <span class="hidden-md hidden-lg">Truyenthegioi.com</span>
+                  <span class="hidden-md hidden-lg">truyen9.com</span>
 
               </div>
              <?php endif; ?>
