@@ -51,5 +51,6 @@
   <script src="/sites/all/themes/oms/js/pushy/js/pushy.js" async defer></script>
 
   <a id="login-popup" class="ctools-use-modal ctools-modal-modal-popup-small" href="/modal_forms/nojs/login">Login</a>
+  <!-- Global site tag (gtag.js) - Google Analytics --> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111480301-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-111480301-1'); </script>
 </body>
 </html>
