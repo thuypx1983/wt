@@ -654,3 +654,12 @@ $conf['reverse_proxy_addresses'] = array('127.0.0.1','localhost');
 $conf['cache_backends'][] = 'sites/all/modules/varnish/varnish.cache.inc';
 
 $conf['cache_class_cache_page'] = 'VarnishCache';
+
+// Force HTTPS, since we are using SSL exclusivelyX-Forwarded-Proto
+#print_r($_SERVER);die();
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+  if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+    $_SERVER['HTTPS'] = 'on';
+  }
+}
+$base_url="https://truyen9.com";
